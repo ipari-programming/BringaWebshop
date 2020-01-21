@@ -33,9 +33,9 @@ CREATE DATABASE kerekpardb
 USE kerekpardb;
 
 --
--- Create table `felni_atmerok`
+-- Create table `felniAtmerok`
 --
-CREATE TABLE felni_atmerok (
+CREATE TABLE felniAtmerok (
   id INT(11) NOT NULL AUTO_INCREMENT,
   meret VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (id)
@@ -54,7 +54,7 @@ DELIMITER $$
 CREATE DEFINER = 'root'@'localhost'
 PROCEDURE WheelDiameterUpdate(IN paramId INT, IN paramSize VARCHAR(255))
 BEGIN
-UPDATE felni_atmerok
+UPDATE felniAtmerok
 SET meret = paramSize
 WHERE id = paramId;
 END
@@ -68,7 +68,7 @@ PROCEDURE WheelDiameterGetById(IN paramId INT)
 BEGIN
 SELECT
   *
-FROM felni_atmerok
+FROM felniAtmerok
 WHERE id = paramId;
 END
 $$
@@ -81,7 +81,7 @@ PROCEDURE WheelDiameterGetAll()
 BEGIN
 SELECT
   *
-FROM felni_atmerok;
+FROM felniAtmerok;
 END
 $$
 
@@ -92,7 +92,7 @@ CREATE DEFINER = 'root'@'localhost'
 PROCEDURE WheelDiameterDelete(IN paramId INT)
 BEGIN
 DELETE
-  FROM felni_atmerok
+  FROM felniAtmerok
 WHERE id = paramId;
 END
 $$
@@ -103,7 +103,7 @@ $$
 CREATE DEFINER = 'root'@'localhost'
 PROCEDURE WheelDiameterCreate(IN paramSize VARCHAR(255))
 BEGIN
-INSERT INTO felni_atmerok (meret)
+INSERT INTO felniAtmerok (meret)
   VALUES (paramSize);
 END
 $$
@@ -232,9 +232,9 @@ $$
 DELIMITER ;
 
 --
--- Create table `fizetes_modja`
+-- Create table `fizetesModja`
 --
-CREATE TABLE fizetes_modja (
+CREATE TABLE fizetesModja (
   id INT(11) NOT NULL AUTO_INCREMENT,
   `mod` VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (id)
@@ -255,7 +255,7 @@ PROCEDURE PaymentMethodGetById(IN paramId INT)
 BEGIN
 SELECT
   *
-FROM fizetes_modja
+FROM fizetesModja
 WHERE id = paramId;
 END
 $$
@@ -268,7 +268,7 @@ PROCEDURE PaymentMethodGetAll()
 BEGIN
 SELECT
   *
-FROM fizetes_modja;
+FROM fizetesModja;
 END
 $$
 
@@ -538,10 +538,10 @@ DELIMITER ;
 --
 CREATE TABLE vasarlas (
   id INT(11) NOT NULL AUTO_INCREMENT,
-  vasarlo_uniqId VARCHAR(255) DEFAULT NULL,
-  termek_kod VARCHAR(255) DEFAULT NULL,
+  vasarloUniqId VARCHAR(255) DEFAULT NULL,
+  termekKod VARCHAR(255) DEFAULT NULL,
   idopont DATETIME DEFAULT NULL,
-  fizetes_modja VARCHAR(255) DEFAULT NULL,
+  fizetesModja VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (id)
 )
 ENGINE = INNODB,
@@ -738,17 +738,17 @@ INSERT INTO kerekpar VALUES
 (5, '7282042966', 4, 4, 5, 2, 4, 100000);
 
 -- 
--- Dumping data for table fizetes_modja
+-- Dumping data for table fizetesModja
 --
-INSERT INTO fizetes_modja VALUES
+INSERT INTO fizetesModja VALUES
 (1, 'készpénz átvételkor'),
 (2, 'kártyás'),
 (3, 'átutalás');
 
 -- 
--- Dumping data for table felni_atmerok
+-- Dumping data for table felniAtmerok
 --
-INSERT INTO felni_atmerok VALUES
+INSERT INTO felniAtmerok VALUES
 (1, '12” – 203 mm'),
 (2, '14” – 254 mm'),
 (3, '16” – 305 mm'),

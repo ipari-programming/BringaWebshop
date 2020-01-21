@@ -1,0 +1,6 @@
+# Vasarlashoz:
+CREATE
+DELETE
+UPDATE
+GETALL
+GETBYID

@@ -11,7 +11,7 @@ import { DiakEntity, RequestDiakByName } from "./../services/client/diakService"
 import { UserResponse } from "../services/client/userService";
 import { Theme, createStyles, withStyles, WithStyles } from "@material-ui/core"
 import withRoot from "./../withRoot";
-import { async } from "q";
+import Button from 'react-bootstrap/Button';
 
 const styles = (theme: Theme) =>
   createStyles
@@ -154,6 +154,7 @@ class Home extends Connected<typeof React.Component, IProps & WithStyles<typeof 
       const Body = () =>
         <div className={css.contaier}>
           <div className={css.buttonContainer}>
+            <Button variant="primary">asd</Button>
             <button className={css.button} onClick={this.login}>LOGIN</button>
             <button className={css.button} onClick={this.getUserData}>"Who Am I"</button>
             <button className={css.button} onClick={this.getDiakok}>Diak</button>

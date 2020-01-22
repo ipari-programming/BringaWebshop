@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ae60b11b-7d91-453d-aae1-19752644261d" name="Default Changelist" comment="" />
+    <list default="true" id="3323a193-8c51-4c31-8ce9-9ddcd2a528cf" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../library/Services/src/main/java/service/BrandService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../library/Services/src/main/java/service/PurchaseService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../library/Services/src/main/java/service/ShifterService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../library/Services/src/main/java/service/SizeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../library/Services/src/main/java/service/TypeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../library/Services/src/main/java/service/WheelDiameterService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../library/WebAPI/src/main/java/controllers/BrandController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../library/WebAPI/src/main/java/controllers/PurchaseController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../library/WebAPI/src/main/java/controllers/ShifterController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../library/WebAPI/src/main/java/controllers/SizeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../library/WebAPI/src/main/java/controllers/TypeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../library/WebAPI/src/main/java/controllers/WheelDiameterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../library/Infrastructure/src/main/java/repositories/IBrandRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../library/Infrastructure/src/main/java/repositories/IBrandRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../library/Repositories/src/main/java/repository/BrandRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../library/Repositories/src/main/java/repository/BrandRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../library/WebAPI/src/main/java/configuration/SwaggerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../library/WebAPI/src/main/java/configuration/SwaggerConfiguration.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,11 +31,12 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Class" />
-        <option value="Interface" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -24,11 +45,13 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectId" id="1WhEdRZKUfVvBZCGx7lNgWL5ZdZ" />
+  <component name="ProjectId" id="1Wl9BUqiPc0eXkz1GIaKtK3QHv2" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -47,12 +70,23 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ae60b11b-7d91-453d-aae1-19752644261d" name="Default Changelist" comment="" />
-      <created>1579593512988</created>
+      <changelist id="3323a193-8c51-4c31-8ce9-9ddcd2a528cf" name="Default Changelist" comment="" />
+      <created>1579713178150</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1579593512988</updated>
+      <updated>1579713178150</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

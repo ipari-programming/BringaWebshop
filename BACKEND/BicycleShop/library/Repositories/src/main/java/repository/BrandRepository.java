@@ -3,6 +3,7 @@ package repository;
 import common.DBConnection;
 import entity.BrandEntity;
 import org.springframework.stereotype.Service;
+import repositories.IBrandRepository;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class BrandRepository {
+public class BrandRepository implements IBrandRepository {
 
     public BrandEntity BrandCreate(BrandEntity brandEntity) throws Exception
     {

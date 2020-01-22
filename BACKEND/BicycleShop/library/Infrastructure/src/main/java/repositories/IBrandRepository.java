@@ -9,4 +9,5 @@ public interface IBrandRepository {
     BrandEntity update(BrandEntity brandEntity) throws Exception;
     boolean delete(int id) throws Exception;
     List<BrandEntity> getAll() throws Exception;
+    BrandEntity getById(int id) throws Exception;
 }

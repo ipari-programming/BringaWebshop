@@ -75,7 +75,6 @@ public class SecurityController
             {
                 throw new Exception("Authentication faild!");
             }
-
             List<Role> roles = new ArrayList<>();
 
             roles.add(enums.Role.valueOf(user.Role));

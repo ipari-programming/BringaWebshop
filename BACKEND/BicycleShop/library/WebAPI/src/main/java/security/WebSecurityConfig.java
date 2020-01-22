@@ -41,7 +41,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         http.authorizeRequests()
             .antMatchers("/api/security/login").permitAll()
             .antMatchers("/api/security/register").permitAll()
-            // Disallow everything else..
+                //swagger
+                .antMatchers("/swagger").permitAll()
+                // Disallow everything else..
             .anyRequest().authenticated();
 
         // If a user try to access a resource without having enough permissions

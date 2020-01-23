@@ -7,7 +7,7 @@
 //----------------------
 // ReSharper disable InconsistentNaming
 
-export class DiakService {
+export class BicycleService {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
@@ -19,14 +19,14 @@ export class DiakService {
 
     /**
      * create
-     * @param typeEntity typeEntity
+     * @param bicycleEntity bicycleEntity
      * @return OK
      */
-    4(typeEntity: TypeEntity): Promise<TypeEntity> {
-        let url_ = this.baseUrl + "/api/type";
+    create(bicycleEntity: BicycleEntity): Promise<BicycleEntity> {
+        let url_ = this.baseUrl + "/api/bicycle";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(typeEntity);
+        const content_ = JSON.stringify(bicycleEntity);
 
         let options_ = <RequestInit>{
             body: content_,
@@ -38,17 +38,17 @@ export class DiakService {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.process4(_response);
+            return this.processCreate(_response);
         });
     }
 
-    protected process4(response: Response): Promise<TypeEntity> {
+    protected processCreate(response: Response): Promise<BicycleEntity> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : <TypeEntity>JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = _responseText === "" ? null : <BicycleEntity>JSON.parse(_responseText, this.jsonParseReviver);
             return result200;
             });
         } else if (status === 201) {
@@ -72,30 +72,19 @@ export class DiakService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<TypeEntity>(<any>null);
-    }
-}
-
-export class DiakService {
-    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
-        this.http = http ? http : <any>window;
-        this.baseUrl = baseUrl ? baseUrl : "localhost:8080/";
+        return Promise.resolve<BicycleEntity>(<any>null);
     }
 
     /**
      * update
-     * @param typeEntity typeEntity
+     * @param bicycleEntity bicycleEntity
      * @return OK
      */
-    3(typeEntity: TypeEntity): Promise<TypeEntity> {
-        let url_ = this.baseUrl + "/api/type";
+    update(bicycleEntity: BicycleEntity): Promise<BicycleEntity> {
+        let url_ = this.baseUrl + "/api/bicycle";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(typeEntity);
+        const content_ = JSON.stringify(bicycleEntity);
 
         let options_ = <RequestInit>{
             body: content_,
@@ -107,17 +96,17 @@ export class DiakService {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.process3(_response);
+            return this.processUpdate(_response);
         });
     }
 
-    protected process3(response: Response): Promise<TypeEntity> {
+    protected processUpdate(response: Response): Promise<BicycleEntity> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : <TypeEntity>JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = _responseText === "" ? null : <BicycleEntity>JSON.parse(_responseText, this.jsonParseReviver);
             return result200;
             });
         } else if (status === 201) {
@@ -141,26 +130,15 @@ export class DiakService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<TypeEntity>(<any>null);
-    }
-}
-
-export class DiakService {
-    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
-        this.http = http ? http : <any>window;
-        this.baseUrl = baseUrl ? baseUrl : "localhost:8080/";
+        return Promise.resolve<BicycleEntity>(<any>null);
     }
 
     /**
      * all
      * @return OK
      */
-    5(): Promise<TypeEntity[]> {
-        let url_ = this.baseUrl + "/api/type/all";
+    all(): Promise<BicycleEntity[]> {
+        let url_ = this.baseUrl + "/api/bicycle/all";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <RequestInit>{
@@ -171,17 +149,17 @@ export class DiakService {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.process5(_response);
+            return this.processAll(_response);
         });
     }
 
-    protected process5(response: Response): Promise<TypeEntity[]> {
+    protected processAll(response: Response): Promise<BicycleEntity[]> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : <TypeEntity[]>JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = _responseText === "" ? null : <BicycleEntity[]>JSON.parse(_responseText, this.jsonParseReviver);
             return result200;
             });
         } else if (status === 401) {
@@ -201,18 +179,65 @@ export class DiakService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<TypeEntity[]>(<any>null);
+        return Promise.resolve<BicycleEntity[]>(<any>null);
     }
-}
 
-export class DiakService {
-    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+    /**
+     * getByItemNumber
+     * @param data data
+     * @return OK
+     */
+    getByItemNumber(data: RequestBicycleSelectByItemNumber): Promise<BicycleEntity> {
+        let url_ = this.baseUrl + "/api/bicycle/byItemNumber";
+        url_ = url_.replace(/[?&]$/, "");
 
-    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
-        this.http = http ? http : <any>window;
-        this.baseUrl = baseUrl ? baseUrl : "localhost:8080/";
+        const content_ = JSON.stringify(data);
+
+        let options_ = <RequestInit>{
+            body: content_,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processGetByItemNumber(_response);
+        });
+    }
+
+    protected processGetByItemNumber(response: Response): Promise<BicycleEntity> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : <BicycleEntity>JSON.parse(_responseText, this.jsonParseReviver);
+            return result200;
+            });
+        } else if (status === 201) {
+            return response.text().then((_responseText) => {
+            return throwException("Created", status, _responseText, _headers);
+            });
+        } else if (status === 401) {
+            return response.text().then((_responseText) => {
+            return throwException("Unauthorized", status, _responseText, _headers);
+            });
+        } else if (status === 403) {
+            return response.text().then((_responseText) => {
+            return throwException("Forbidden", status, _responseText, _headers);
+            });
+        } else if (status === 404) {
+            return response.text().then((_responseText) => {
+            return throwException("Not Found", status, _responseText, _headers);
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<BicycleEntity>(<any>null);
     }
 
     /**
@@ -220,8 +245,8 @@ export class DiakService {
      * @param id id
      * @return OK
      */
-    5(id: number): Promise<TypeEntity> {
-        let url_ = this.baseUrl + "/api/type/{id}";
+    getById(id: number): Promise<BicycleEntity> {
+        let url_ = this.baseUrl + "/api/bicycle/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
@@ -235,17 +260,17 @@ export class DiakService {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.process5(_response);
+            return this.processGetById(_response);
         });
     }
 
-    protected process5(response: Response): Promise<TypeEntity> {
+    protected processGetById(response: Response): Promise<BicycleEntity> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : <TypeEntity>JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = _responseText === "" ? null : <BicycleEntity>JSON.parse(_responseText, this.jsonParseReviver);
             return result200;
             });
         } else if (status === 401) {
@@ -265,18 +290,7 @@ export class DiakService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<TypeEntity>(<any>null);
-    }
-}
-
-export class DiakService {
-    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
-        this.http = http ? http : <any>window;
-        this.baseUrl = baseUrl ? baseUrl : "localhost:8080/";
+        return Promise.resolve<BicycleEntity>(<any>null);
     }
 
     /**
@@ -284,8 +298,8 @@ export class DiakService {
      * @param id id
      * @return OK
      */
-    3(id: number): Promise<boolean> {
-        let url_ = this.baseUrl + "/api/type/{id}";
+    delete(id: number): Promise<boolean> {
+        let url_ = this.baseUrl + "/api/bicycle/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
@@ -299,11 +313,11 @@ export class DiakService {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.process3(_response);
+            return this.processDelete(_response);
         });
     }
 
-    protected process3(response: Response): Promise<boolean> {
+    protected processDelete(response: Response): Promise<boolean> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -333,11 +347,27 @@ export class DiakService {
     }
 }
 
-export interface TypeEntity {
+export interface BicycleEntity {
+    Ar?: number | undefined;
+    Cikkszam?: string | undefined;
+    FelniAtmeroID?: number | undefined;
     Id?: number | undefined;
-    Type?: string | undefined;
+    MarkaID?: number | undefined;
+    TipusID?: number | undefined;
+    ValtoTipus?: number | undefined;
+    VazmeretID?: number | undefined;
+    ar?: number | undefined;
+    cikkszam?: string | undefined;
+    felniAtmeroID?: number | undefined;
     id?: number | undefined;
-    type?: string | undefined;
+    markaID?: number | undefined;
+    tipusID?: number | undefined;
+    valtoTipus?: number | undefined;
+    vazmeretID?: number | undefined;
+}
+
+export interface RequestBicycleSelectByItemNumber {
+    Cikkszam?: string | undefined;
 }
 
 export class ApiException extends Error {

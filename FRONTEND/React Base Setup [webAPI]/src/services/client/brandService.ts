@@ -7,7 +7,7 @@
 //----------------------
 // ReSharper disable InconsistentNaming
 
-export class DiakService {
+export class BrandService {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
@@ -19,14 +19,14 @@ export class DiakService {
 
     /**
      * create
-     * @param sizeEntity sizeEntity
+     * @param brandEntity brandEntity
      * @return OK
      */
-    3(sizeEntity: SizeEntity): Promise<SizeEntity> {
-        let url_ = this.baseUrl + "/api/size";
+    1(brandEntity: BrandEntity): Promise<BrandEntity> {
+        let url_ = this.baseUrl + "/api/brand";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(sizeEntity);
+        const content_ = JSON.stringify(brandEntity);
 
         let options_ = <RequestInit>{
             body: content_,
@@ -38,17 +38,17 @@ export class DiakService {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.process3(_response);
+            return this.process1(_response);
         });
     }
 
-    protected process3(response: Response): Promise<SizeEntity> {
+    protected process1(response: Response): Promise<BrandEntity> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : <SizeEntity>JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = _responseText === "" ? null : <BrandEntity>JSON.parse(_responseText, this.jsonParseReviver);
             return result200;
             });
         } else if (status === 201) {
@@ -72,11 +72,11 @@ export class DiakService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<SizeEntity>(<any>null);
+        return Promise.resolve<BrandEntity>(<any>null);
     }
 }
 
-export class DiakService {
+export class BrandService {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
@@ -88,14 +88,14 @@ export class DiakService {
 
     /**
      * update
-     * @param sizeEntity sizeEntity
+     * @param brandEntity brandEntity
      * @return OK
      */
-    2(sizeEntity: SizeEntity): Promise<SizeEntity> {
-        let url_ = this.baseUrl + "/api/size";
+    1(brandEntity: BrandEntity): Promise<BrandEntity> {
+        let url_ = this.baseUrl + "/api/brand";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(sizeEntity);
+        const content_ = JSON.stringify(brandEntity);
 
         let options_ = <RequestInit>{
             body: content_,
@@ -107,17 +107,17 @@ export class DiakService {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.process2(_response);
+            return this.process1(_response);
         });
     }
 
-    protected process2(response: Response): Promise<SizeEntity> {
+    protected process1(response: Response): Promise<BrandEntity> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : <SizeEntity>JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = _responseText === "" ? null : <BrandEntity>JSON.parse(_responseText, this.jsonParseReviver);
             return result200;
             });
         } else if (status === 201) {
@@ -141,11 +141,11 @@ export class DiakService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<SizeEntity>(<any>null);
+        return Promise.resolve<BrandEntity>(<any>null);
     }
 }
 
-export class DiakService {
+export class BrandService {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
@@ -159,8 +159,8 @@ export class DiakService {
      * all
      * @return OK
      */
-    4(): Promise<SizeEntity[]> {
-        let url_ = this.baseUrl + "/api/size/all";
+    1(): Promise<BrandEntity[]> {
+        let url_ = this.baseUrl + "/api/brand/all";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <RequestInit>{
@@ -171,17 +171,17 @@ export class DiakService {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.process4(_response);
+            return this.process1(_response);
         });
     }
 
-    protected process4(response: Response): Promise<SizeEntity[]> {
+    protected process1(response: Response): Promise<BrandEntity[]> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : <SizeEntity[]>JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = _responseText === "" ? null : <BrandEntity[]>JSON.parse(_responseText, this.jsonParseReviver);
             return result200;
             });
         } else if (status === 401) {
@@ -201,11 +201,11 @@ export class DiakService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<SizeEntity[]>(<any>null);
+        return Promise.resolve<BrandEntity[]>(<any>null);
     }
 }
 
-export class DiakService {
+export class BrandService {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
@@ -220,8 +220,8 @@ export class DiakService {
      * @param id id
      * @return OK
      */
-    4(id: number): Promise<SizeEntity> {
-        let url_ = this.baseUrl + "/api/size/{id}";
+    1(id: number): Promise<BrandEntity> {
+        let url_ = this.baseUrl + "/api/brand/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
@@ -235,17 +235,17 @@ export class DiakService {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.process4(_response);
+            return this.process1(_response);
         });
     }
 
-    protected process4(response: Response): Promise<SizeEntity> {
+    protected process1(response: Response): Promise<BrandEntity> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : <SizeEntity>JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = _responseText === "" ? null : <BrandEntity>JSON.parse(_responseText, this.jsonParseReviver);
             return result200;
             });
         } else if (status === 401) {
@@ -265,11 +265,11 @@ export class DiakService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<SizeEntity>(<any>null);
+        return Promise.resolve<BrandEntity>(<any>null);
     }
 }
 
-export class DiakService {
+export class BrandService {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
@@ -284,8 +284,8 @@ export class DiakService {
      * @param id id
      * @return OK
      */
-    2(id: number): Promise<boolean> {
-        let url_ = this.baseUrl + "/api/size/{id}";
+    1(id: number): Promise<boolean> {
+        let url_ = this.baseUrl + "/api/brand/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
@@ -299,11 +299,11 @@ export class DiakService {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.process2(_response);
+            return this.process1(_response);
         });
     }
 
-    protected process2(response: Response): Promise<boolean> {
+    protected process1(response: Response): Promise<boolean> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -333,11 +333,11 @@ export class DiakService {
     }
 }
 
-export interface SizeEntity {
+export interface BrandEntity {
     Id?: number | undefined;
-    Size?: string | undefined;
+    Name?: string | undefined;
     id?: number | undefined;
-    size?: string | undefined;
+    name?: string | undefined;
 }
 
 export class ApiException extends Error {

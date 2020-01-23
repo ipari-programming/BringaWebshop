@@ -7,7 +7,7 @@
 //----------------------
 // ReSharper disable InconsistentNaming
 
-export class DiakService {
+export class PurchaseService {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
@@ -19,14 +19,14 @@ export class DiakService {
 
     /**
      * create
-     * @param brandEntity brandEntity
+     * @param purchaseEntity purchaseEntity
      * @return OK
      */
-    1(brandEntity: BrandEntity): Promise<BrandEntity> {
-        let url_ = this.baseUrl + "/api/brand";
+    2(purchaseEntity: PurchaseEntity): Promise<PurchaseEntity> {
+        let url_ = this.baseUrl + "/api/purchase";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(brandEntity);
+        const content_ = JSON.stringify(purchaseEntity);
 
         let options_ = <RequestInit>{
             body: content_,
@@ -38,17 +38,17 @@ export class DiakService {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.process1(_response);
+            return this.process2(_response);
         });
     }
 
-    protected process1(response: Response): Promise<BrandEntity> {
+    protected process2(response: Response): Promise<PurchaseEntity> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : <BrandEntity>JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = _responseText === "" ? null : <PurchaseEntity>JSON.parse(_responseText, this.jsonParseReviver);
             return result200;
             });
         } else if (status === 201) {
@@ -72,80 +72,11 @@ export class DiakService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<BrandEntity>(<any>null);
+        return Promise.resolve<PurchaseEntity>(<any>null);
     }
 }
 
-export class DiakService {
-    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
-        this.http = http ? http : <any>window;
-        this.baseUrl = baseUrl ? baseUrl : "localhost:8080/";
-    }
-
-    /**
-     * update
-     * @param brandEntity brandEntity
-     * @return OK
-     */
-    1(brandEntity: BrandEntity): Promise<BrandEntity> {
-        let url_ = this.baseUrl + "/api/brand";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(brandEntity);
-
-        let options_ = <RequestInit>{
-            body: content_,
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.process1(_response);
-        });
-    }
-
-    protected process1(response: Response): Promise<BrandEntity> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            result200 = _responseText === "" ? null : <BrandEntity>JSON.parse(_responseText, this.jsonParseReviver);
-            return result200;
-            });
-        } else if (status === 201) {
-            return response.text().then((_responseText) => {
-            return throwException("Created", status, _responseText, _headers);
-            });
-        } else if (status === 401) {
-            return response.text().then((_responseText) => {
-            return throwException("Unauthorized", status, _responseText, _headers);
-            });
-        } else if (status === 403) {
-            return response.text().then((_responseText) => {
-            return throwException("Forbidden", status, _responseText, _headers);
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            return throwException("Not Found", status, _responseText, _headers);
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<BrandEntity>(<any>null);
-    }
-}
-
-export class DiakService {
+export class PurchaseService {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
@@ -159,8 +90,8 @@ export class DiakService {
      * all
      * @return OK
      */
-    1(): Promise<BrandEntity[]> {
-        let url_ = this.baseUrl + "/api/brand/all";
+    2(): Promise<PurchaseEntity[]> {
+        let url_ = this.baseUrl + "/api/purchase/all";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <RequestInit>{
@@ -171,17 +102,17 @@ export class DiakService {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.process1(_response);
+            return this.process2(_response);
         });
     }
 
-    protected process1(response: Response): Promise<BrandEntity[]> {
+    protected process2(response: Response): Promise<PurchaseEntity[]> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : <BrandEntity[]>JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = _responseText === "" ? null : <PurchaseEntity[]>JSON.parse(_responseText, this.jsonParseReviver);
             return result200;
             });
         } else if (status === 401) {
@@ -201,11 +132,11 @@ export class DiakService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<BrandEntity[]>(<any>null);
+        return Promise.resolve<PurchaseEntity[]>(<any>null);
     }
 }
 
-export class DiakService {
+export class PurchaseService {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
@@ -220,8 +151,8 @@ export class DiakService {
      * @param id id
      * @return OK
      */
-    1(id: number): Promise<BrandEntity> {
-        let url_ = this.baseUrl + "/api/brand/{id}";
+    2(id: number): Promise<PurchaseEntity> {
+        let url_ = this.baseUrl + "/api/purchase/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
@@ -235,17 +166,17 @@ export class DiakService {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.process1(_response);
+            return this.process2(_response);
         });
     }
 
-    protected process1(response: Response): Promise<BrandEntity> {
+    protected process2(response: Response): Promise<PurchaseEntity> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : <BrandEntity>JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = _responseText === "" ? null : <PurchaseEntity>JSON.parse(_responseText, this.jsonParseReviver);
             return result200;
             });
         } else if (status === 401) {
@@ -265,79 +196,33 @@ export class DiakService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<BrandEntity>(<any>null);
+        return Promise.resolve<PurchaseEntity>(<any>null);
     }
 }
 
-export class DiakService {
-    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
-        this.http = http ? http : <any>window;
-        this.baseUrl = baseUrl ? baseUrl : "localhost:8080/";
-    }
-
-    /**
-     * delete
-     * @param id id
-     * @return OK
-     */
-    1(id: number): Promise<boolean> {
-        let url_ = this.baseUrl + "/api/brand/{id}";
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ = <RequestInit>{
-            method: "DELETE",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.process1(_response);
-        });
-    }
-
-    protected process1(response: Response): Promise<boolean> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            result200 = _responseText === "" ? null : <boolean>JSON.parse(_responseText, this.jsonParseReviver);
-            return result200;
-            });
-        } else if (status === 204) {
-            return response.text().then((_responseText) => {
-            return throwException("No Content", status, _responseText, _headers);
-            });
-        } else if (status === 401) {
-            return response.text().then((_responseText) => {
-            return throwException("Unauthorized", status, _responseText, _headers);
-            });
-        } else if (status === 403) {
-            return response.text().then((_responseText) => {
-            return throwException("Forbidden", status, _responseText, _headers);
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<boolean>(<any>null);
-    }
-}
-
-export interface BrandEntity {
+export interface PurchaseEntity {
+    CustomerUniqId?: string | undefined;
+    Date?: Date | undefined;
     Id?: number | undefined;
-    Name?: string | undefined;
+    ItemId?: number | undefined;
+    PaymentMethod?: PurchaseEntityPaymentMethod | undefined;
+    customerUniqId?: string | undefined;
+    date?: Date | undefined;
     id?: number | undefined;
-    name?: string | undefined;
+    itemId?: number | undefined;
+    paymentMethod?: PurchaseEntityPaymentMethod2 | undefined;
+}
+
+export enum PurchaseEntityPaymentMethod {
+    PAYMENT_CASH = "PAYMENT_CASH",
+    PAYMENT_DEBITCARD = "PAYMENT_DEBITCARD",
+    PAYMENT_TRANSFER = "PAYMENT_TRANSFER",
+}
+
+export enum PurchaseEntityPaymentMethod2 {
+    PAYMENT_CASH = "PAYMENT_CASH",
+    PAYMENT_DEBITCARD = "PAYMENT_DEBITCARD",
+    PAYMENT_TRANSFER = "PAYMENT_TRANSFER",
 }
 
 export class ApiException extends Error {

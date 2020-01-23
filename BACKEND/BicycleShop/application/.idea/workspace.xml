@@ -1,26 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3323a193-8c51-4c31-8ce9-9ddcd2a528cf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../library/Services/src/main/java/service/BrandService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../library/Services/src/main/java/service/PurchaseService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../library/Services/src/main/java/service/ShifterService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../library/Services/src/main/java/service/SizeService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../library/Services/src/main/java/service/TypeService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../library/Services/src/main/java/service/WheelDiameterService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../library/WebAPI/src/main/java/controllers/BrandController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../library/WebAPI/src/main/java/controllers/PurchaseController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../library/WebAPI/src/main/java/controllers/ShifterController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../library/WebAPI/src/main/java/controllers/SizeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../library/WebAPI/src/main/java/controllers/TypeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../library/WebAPI/src/main/java/controllers/WheelDiameterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+    <list default="true" id="1bcf94fd-9882-40b4-b769-cd05e899f1d8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../library/Infrastructure/src/main/java/repositories/IBrandRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../library/Infrastructure/src/main/java/repositories/IBrandRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../library/Repositories/src/main/java/repository/BrandRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../library/Repositories/src/main/java/repository/BrandRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../library/WebAPI/src/main/java/configuration/SwaggerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../library/WebAPI/src/main/java/configuration/SwaggerConfiguration.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -70,7 +52,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="3323a193-8c51-4c31-8ce9-9ddcd2a528cf" name="Default Changelist" comment="" />
+      <changelist id="1bcf94fd-9882-40b4-b769-cd05e899f1d8" name="Default Changelist" comment="" />
       <created>1579713178150</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -83,7 +65,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

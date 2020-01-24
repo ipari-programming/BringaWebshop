@@ -10,12 +10,33 @@
 </head>
 
 <body>
-    <Header signed-in=true></Header>
+    <script src="header.js"></script>
 
-    <ArticleCard image="https://m.blog.hu/sz/szabadnem/image/10877.jpg" article="Bicikli xd" description="2 kereke van"></ArticleCard>
+    <div class="jumbotron jumbotron-fluid p-0" style="background: #282828;">
+        <img src="./bringawebshop.jpg" alt="" class="w-50 m-auto d-block">
+    </div>
 
-    <script src="./components/Header.js"></script>
-    <script src="./components/ArticleCard.js"></script>
+    <div class="container">
+        <div class="row justify-content-center">
+            <form class="col-12 col-md-8 col-lg-6">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email cím</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Jelszó</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Emlékezz rám</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Bejelentkezés</button>
+                <button type="submit" class="btn">Még nincs fiókja?</button>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>

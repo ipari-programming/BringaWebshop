@@ -45,7 +45,7 @@ public class UserRepository implements IUserRepository
 
         String SQL = "{ CALL UserFindByUniqID(?) }";
         CallableStatement stmt = connection.prepareCall(SQL);
-        stmt.setString("paramUniqID", uniqID);
+        stmt.setString("paramUniqId", uniqID);
 
         ResultSet resultSets = stmt.executeQuery();
 

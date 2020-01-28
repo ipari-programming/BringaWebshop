@@ -12,17 +12,6 @@ public class BicycleResponse extends BicycleEntity{
     public BicycleResponse() {
     }
 
-    public BicycleResponse(String cikkszam, int markaID, int vazmeretID, int felniAtmeroID, int valtoTipus, int tipusID, int ar, String URL) {
-        Cikkszam = cikkszam;
-        MarkaID = markaID;
-        VazmeretID = vazmeretID;
-        FelniAtmeroID = felniAtmeroID;
-        ValtoTipus = valtoTipus;
-        TipusID = tipusID;
-        Ar = ar;
-        this.URL = URL;
-    }
-
     public BicycleResponse(int id, String cikkszam, int markaID, int vazmeretID, int felniAtmeroID, int valtoTipus, int tipusID, int ar, String URL, String marka, String vazmeret, String felniAtmero, String valto, String tipus) {
         super(id, cikkszam, markaID, vazmeretID, felniAtmeroID, valtoTipus, tipusID, ar, URL);
         Marka = marka;

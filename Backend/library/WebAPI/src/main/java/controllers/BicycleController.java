@@ -17,6 +17,7 @@ import java.util.List;
 @RestController
 @Api(tags = {"bicycle"}, value = "BicycleService")
 public class BicycleController {
+
     @Autowired
     IBicycleService _bicycleService;
 

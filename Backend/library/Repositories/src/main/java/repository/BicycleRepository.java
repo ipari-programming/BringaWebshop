@@ -215,18 +215,26 @@ public class BicycleRepository implements IBicycleRepository {
         return  bicycleResponse;
     }
 
-    private BicycleResponse MapBicycleResponse(ResultSet dataset) throws Exception
+    private BicycleResponse MapBicycleResponse(ResultSet dataSet) throws Exception
     {
         BicycleResponse bicycleResponse=new BicycleResponse();
-        bicycleResponse.Marka=dataset.getString("marka");
-        bicycleResponse.Vazmeret=dataset.getString("vazMeret");
-        bicycleResponse.FelniAtmero=dataset.getString("felniAtmero");
-        bicycleResponse.Valto=dataset.getString("valto");
-        bicycleResponse.Tipus=dataset.getString("tipus");
+        bicycleResponse.Marka=dataSet.getString("marka");
+        bicycleResponse.Vazmeret=dataSet.getString("vazMeret");
+        bicycleResponse.FelniAtmero=dataSet.getString("felniAtmero");
+        bicycleResponse.Valto=dataSet.getString("valto");
+        bicycleResponse.Tipus=dataSet.getString("tipus");
+        BicycleEntity bicycleEntity = MapBicycle(dataSet);
+        bicycleResponse.Id = bicycleEntity.Id;
+        bicycleResponse.Cikkszam = bicycleEntity.Cikkszam;
+        bicycleResponse.MarkaID = bicycleEntity.MarkaID;
+        bicycleResponse.VazmeretID = bicycleEntity.VazmeretID;
+        bicycleResponse.FelniAtmeroID = bicycleEntity.FelniAtmeroID;
+        bicycleResponse.ValtoTipus = bicycleEntity.ValtoTipus;
+        bicycleResponse.TipusID = bicycleEntity.TipusID;
+        bicycleResponse.Ar = bicycleEntity.Ar;
+        bicycleResponse.URL = bicycleEntity.URL;
         return bicycleResponse;
-
     }
-
 
     private BicycleEntity MapBicycle(ResultSet dataSet) throws SQLException
     {

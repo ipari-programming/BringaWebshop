@@ -9,8 +9,6 @@ public class BicycleResponse extends BicycleEntity{
     public String Valto;
     public String Tipus;
 
-
-
     public BicycleResponse() {
     }
 
@@ -48,6 +46,5 @@ public class BicycleResponse extends BicycleEntity{
         TipusID=bicycleEntity.TipusID;
         Ar=bicycleEntity.Ar;
         URL=bicycleEntity.URL;
-
     }
 }

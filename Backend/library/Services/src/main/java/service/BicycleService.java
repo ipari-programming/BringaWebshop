@@ -5,6 +5,7 @@ import entity.BicycleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repositories.IBicycleRepository;
+import response.BicycleResponse;
 import services.IBicycleService;
 
 import java.util.List;
@@ -133,6 +134,69 @@ public class BicycleService implements IBicycleService {
                 throw new Exception("Record not deleted (id: " + id + ").");
             }
 
+            response.setIsSuccess(true);
+            response.setMessage("No errors.");
+        }
+        catch (Exception ex)
+        {
+            response.setIsSuccess(false);
+            response.setMessage(ex.getMessage());
+        }
+
+        return response;
+    }
+
+    public ServiceObjectResponse<List<BicycleResponse>> getAllData()
+    {
+        ServiceObjectResponse<List<BicycleResponse>> response = new ServiceObjectResponse<>();
+
+        try
+        {
+            List<BicycleResponse> bicycleResponses = _bicycleRepository.getAllData();
+
+            response.setObject(bicycleResponses);
+            response.setIsSuccess(true);
+            response.setMessage("No errors.");
+        }
+        catch (Exception ex)
+        {
+            response.setIsSuccess(false);
+            response.setMessage(ex.getMessage());
+        }
+
+        return response;
+    }
+
+    public ServiceObjectResponse<BicycleResponse> getDataByItemNumber(String cikkszam)
+    {
+        ServiceObjectResponse<BicycleResponse> response = new ServiceObjectResponse<>();
+
+        try
+        {
+            BicycleResponse bicycleResponse = _bicycleRepository.getDataByItemNumber(cikkszam);
+
+            response.setObject(bicycleResponse);
+            response.setIsSuccess(true);
+            response.setMessage("No errors.");
+        }
+        catch (Exception ex)
+        {
+            response.setIsSuccess(false);
+            response.setMessage(ex.getMessage());
+        }
+
+        return response;
+    }
+
+    public ServiceObjectResponse<BicycleResponse> getDataById(int id)
+    {
+        ServiceObjectResponse<BicycleResponse> response = new ServiceObjectResponse<>();
+
+        try
+        {
+            BicycleResponse bicycleResponse = _bicycleRepository.getDataById(id);
+
+            response.setObject(bicycleResponse);
             response.setIsSuccess(true);
             response.setMessage("No errors.");
         }

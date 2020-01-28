@@ -1,6 +1,7 @@
 package repositories;
 
 import entity.BicycleEntity;
+import response.BicycleResponse;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,4 +14,7 @@ public interface IBicycleRepository {
     List<BicycleEntity> getAll() throws Exception;
     BicycleEntity getById(int id) throws Exception;
     BicycleEntity getByItemNumber(String cikkszam) throws Exception;
+    List<BicycleResponse> getAllData() throws Exception;
+    BicycleResponse getDataById(int id) throws Exception;
+    BicycleResponse getDataByItemNumber(String cikkszam) throws Exception;
 }

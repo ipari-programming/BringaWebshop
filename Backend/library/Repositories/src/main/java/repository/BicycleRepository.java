@@ -4,6 +4,7 @@ import common.DBConnection;
 import entity.BicycleEntity;
 import org.springframework.stereotype.Service;
 import repositories.IBicycleRepository;
+import response.BicycleResponse;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -19,7 +20,7 @@ public class BicycleRepository implements IBicycleRepository {
     {
         Connection connection = DBConnection.getConnection();
 
-        String SQL = "{ CALL BicycleCreate(?, ?, ?, ?, ?, ?, ?, ?) }";
+        String SQL = "{ CALL BicycleCreate(?, ?, ?, ?, ?, ?, ?, ?, ?) }";
 
         CallableStatement stmt = connection.prepareCall(SQL);
         stmt.setInt(1, bicycleEntity.Id);
@@ -30,6 +31,7 @@ public class BicycleRepository implements IBicycleRepository {
         stmt.setInt(6, bicycleEntity.ValtoTipus);
         stmt.setInt(7, bicycleEntity.TipusID);
         stmt.setInt(8, bicycleEntity.Ar);
+        stmt.setString(9, bicycleEntity.URL);
 
 
         ResultSet resultSets  = stmt.executeQuery();
@@ -46,16 +48,17 @@ public class BicycleRepository implements IBicycleRepository {
     {
         Connection connection = DBConnection.getConnection();
 
-        String SQL = "{ CALL BicycleUpdate(?, ?, ?, ?, ?, ?, ?, ?) }";
+        String SQL = "{ CALL BicycleUpdate(?, ?, ?, ?, ?, ?, ?, ?, ?) }";
         CallableStatement stmt = connection.prepareCall(SQL);
         stmt.setInt("paramId", bicycleEntity.Id);
         stmt.setString("paramCikkszam", bicycleEntity.Cikkszam);
         stmt.setInt("paramMarkaId", bicycleEntity.MarkaID);
         stmt.setInt("paramVazmeretId", bicycleEntity.VazmeretID);
         stmt.setInt("paramFelniAtmeroId", bicycleEntity.FelniAtmeroID);
-        stmt.setInt("paramValtoTipus", bicycleEntity.MarkaID);
-        stmt.setInt("paramTipusId", bicycleEntity.MarkaID);
-        stmt.setInt("paramAr", bicycleEntity.MarkaID);
+        stmt.setInt("paramValtoTipus", bicycleEntity.ValtoTipus);
+        stmt.setInt("paramTipusId", bicycleEntity.TipusID);
+        stmt.setInt("paramAr", bicycleEntity.Ar);
+        stmt.setString("paramKep", bicycleEntity.URL);
 
         int affectedRows  = stmt.executeUpdate();
 
@@ -146,6 +149,84 @@ public class BicycleRepository implements IBicycleRepository {
         return  bicycleEntity;
     }
 
+    public List<BicycleResponse> getAllData() throws Exception
+    {
+
+        List<BicycleResponse> bicycleResponses = new ArrayList<>();
+        BicycleResponse bicycleResponse = null;
+
+        Connection connection = DBConnection.getConnection();
+
+        String SQL = "{ CALL BicycleGetAllData() }";
+        CallableStatement stmt = connection.prepareCall(SQL);
+
+        ResultSet resultSets = stmt.executeQuery();
+
+        // Iterate through the data in the result set.
+        while (resultSets.next())
+        {
+            bicycleResponse = MapBicycleResponse(resultSets);
+            bicycleResponses.add(bicycleResponse);
+        }
+
+        return bicycleResponses;
+    }
+
+    public BicycleResponse getDataById(int id) throws Exception
+    {
+        BicycleResponse bicycleResponse = null;
+
+        Connection connection = DBConnection.getConnection();
+
+        String SQL = "{ CALL BicycleSelectDataById(?) }";
+        CallableStatement stmt = connection.prepareCall(SQL);
+        stmt.setInt("paramId", id);
+
+        ResultSet resultSets = stmt.executeQuery();
+
+        // Iterate through the data in the result set.
+        while (resultSets.next())
+        {
+            bicycleResponse = MapBicycleResponse(resultSets);
+
+        }
+
+        return  bicycleResponse;
+    }
+
+    public BicycleResponse getDataByItemNumber(String cikkszam) throws Exception
+    {
+        BicycleResponse bicycleResponse = null;
+
+        Connection connection = DBConnection.getConnection();
+
+        String SQL = "{ CALL BicycleSelectDataByItemNumber(?) }";
+        CallableStatement stmt = connection.prepareCall(SQL);
+        stmt.setString("paramCikkszam", cikkszam);
+
+        ResultSet resultSets = stmt.executeQuery();
+
+        // Iterate through the data in the result set.
+        while (resultSets.next())
+        {
+            bicycleResponse = MapBicycleResponse(resultSets);
+        }
+
+        return  bicycleResponse;
+    }
+
+    private BicycleResponse MapBicycleResponse(ResultSet dataset) throws Exception
+    {
+        BicycleResponse bicycleResponse=new BicycleResponse();
+        bicycleResponse.Marka=dataset.getString("marka");
+        bicycleResponse.Vazmeret=dataset.getString("vazMeret");
+        bicycleResponse.FelniAtmero=dataset.getString("felniAtmero");
+        bicycleResponse.Valto=dataset.getString("valto");
+        bicycleResponse.Tipus=dataset.getString("tipus");
+        return bicycleResponse;
+
+    }
+
 
     private BicycleEntity MapBicycle(ResultSet dataSet) throws SQLException
     {
@@ -158,6 +239,7 @@ public class BicycleRepository implements IBicycleRepository {
         bicycleEntity.ValtoTipus = Integer.parseInt(dataSet.getString("ValtoTipus"));
         bicycleEntity.TipusID = Integer.parseInt(dataSet.getString("tipusID"));
         bicycleEntity.Ar = Integer.parseInt(dataSet.getString("ar"));
+        bicycleEntity.URL = dataSet.getString("kep");
         return  bicycleEntity;
     }
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import request.RequestBicycleSelectByItemNumber;
+import response.BicycleResponse;
 import services.IBicycleService;
 
 import javax.validation.Valid;
@@ -64,6 +65,7 @@ public class BicycleController {
         }
         return request.getObject();
     }
+
     @ApiOperation(value = "update", nickname = "update")
     @PutMapping("/api/bicycle")
     @ResponseBody
@@ -101,6 +103,51 @@ public class BicycleController {
     public BicycleEntity GetBicycleById(@PathVariable int id) throws Exception
     {
         ServiceObjectResponse<BicycleEntity> request = _bicycleService.getById(id);
+
+        if(!request.getIsSuccess())
+        {
+            throw new Exception(request.getMessage());
+        }
+        return request.getObject();
+    }
+
+    @ApiOperation(value = "allData", nickname = "allData")
+    @GetMapping("/api/bicycle/data/all")
+    @ResponseBody
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENT')")
+    public List<BicycleResponse> GetAllData() throws Exception
+    {
+        ServiceObjectResponse<List<BicycleResponse>> request = _bicycleService.getAllData();
+
+        if(!request.getIsSuccess())
+        {
+            throw new Exception(request.getMessage());
+        }
+        return request.getObject();
+    }
+
+    @ApiOperation(value = "getDataByItemNumber", nickname = "getDataByItemNumber")
+    @PostMapping("/api/bicycle/data/byItemNumber")
+    @ResponseBody
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENT')")
+    public BicycleResponse GetBicycleDataByItemNumber(@RequestBody @Valid RequestBicycleSelectByItemNumber data) throws Exception
+    {
+        ServiceObjectResponse<BicycleResponse> request = _bicycleService.getDataByItemNumber(data.Cikkszam);
+
+        if(!request.getIsSuccess())
+        {
+            throw new Exception(request.getMessage());
+        }
+        return request.getObject();
+    }
+
+    @ApiOperation(value = "getDataById", nickname = "getDataById")
+    @GetMapping("/api/bicycle/data/{id}")
+    @ResponseBody
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENT')")
+    public BicycleResponse GetBicycleDataById(@PathVariable int id) throws Exception
+    {
+        ServiceObjectResponse<BicycleResponse> request = _bicycleService.getDataById(id);
 
         if(!request.getIsSuccess())
         {

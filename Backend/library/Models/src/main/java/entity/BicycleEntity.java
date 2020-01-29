@@ -26,7 +26,7 @@ public class BicycleEntity {
         this.URL = URL;
     }
 
-    public String getURL() {
+   /* public String getURL() {
         return URL;
     }
 
@@ -96,5 +96,5 @@ public class BicycleEntity {
 
     public void setAr(int ar) {
         Ar = ar;
-    }
+    }*/
 }

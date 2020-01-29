@@ -11,4 +11,4 @@ Ezeket az oldalakat át kell írni React-be, szóval vannak dolgok, amiket el ke
 - [ ] Oldal függőleges kitöltése. Hogyan?
 - [ ] admin.html
 - [ ] articles.html
-- [x] index.html
+- [ ] index.html

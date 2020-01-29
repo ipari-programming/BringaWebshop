@@ -15,3 +15,8 @@ body
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
 }
+
+.logo{
+    display: block;
+    margin: auto;
+}

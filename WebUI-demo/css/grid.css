@@ -5,11 +5,12 @@
     box-sizing: border-box;
 }
 
-.row { font-size: 0; }
+.row { display: float; clear: both; font-size: 0; }
 .row > *
 {
-    display: inline-block;
+    display: float;
     font-size: initial;
+    float: left;
 }
 
 /* For mobile phones: */

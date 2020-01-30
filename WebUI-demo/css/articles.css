@@ -15,7 +15,7 @@
     box-shadow: 5px 5px 20px #33ff00 ;
 }
 
-.container{
+.card-container{
     width: 300px;
     max-height: 800px;
     background-color: #121212;
@@ -48,8 +48,13 @@
     margin: auto;
     align-items: center;
     margin-bottom: 80px;
+    justify-content: center;
+    flex-direction: "column";
+    width: "100%";
 }
+
 h1{
     text-align: center;
+    margin-top: 10px;
     margin-bottom: 10px;
 }

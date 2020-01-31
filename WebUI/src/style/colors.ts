@@ -1,8 +1,7 @@
 export module CustomColors
 {
-    export const background1 = "#000";
-    export const background2 = "#78946C";
-    export const background3 = "#7EA169";
-    export const background4 = "#848269";
-    export const foreground = "#EFEFEF";
+    export const background = "#000";
+    export const font = "#ceb95e";
+    export const darkerFont = "#716b50";
+    export const borderColor = "#847846";
 }

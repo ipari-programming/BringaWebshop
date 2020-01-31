@@ -11,150 +11,238 @@ import { Validation } from "./../../validators";
 import { WebAPI } from "./../../services/webAPI";
 import { LoginRequest } from "./../../services/client/securityService";
 import { StorageKeys } from "./../../settings/constats";
-import FooterComponent from "../footer/footer";
+import FooterComponent from "./../footer/footer";
 
 const styles = (theme: Theme) =>
   createStyles
-    ({
-      container:
+  ({
+    container:
+    {
+      display: "flex",
+      flexGrow: 1,
+      flexDirection: "column",
+      backgroundColor: CustomColors.background,
+      color: CustomColors.font
+    },
+    content:
+    {
+      display: "flex",
+      flexGrow: 1,
+      flexDirection: "row"
+    },
+    logoContainer:
+    {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    },
+    loginContainer:
+    {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      flexDirection: "column",
+      width: "100%"
+    },
+    bottom:
+    {
+      minHeight: 416,
+      padding: 10,
+      fontSize: 50,
+      color: CustomColors.font,
+      backgroundColor: CustomColors.background,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    },
+    textField:
+    {
+      width: "90%"
+    },
+    textFieldLabel:
+    {
+      color : `${CustomColors.darkerFont} !important`,
+    },
+    textFieldOutlinedInput:
+    {
+      "&$cssFocused $notchedOutline":
       {
-        display: "flex",
-        flexGrow: 1,
-        flexDirection: "column",
-        backgroundColor: CustomColors.background1,
-        color: CustomColors.foreground
-      },
-      content:
-      {
-        display: "flex",
-        flexGrow: 1,
-        flexDirection: "row"
-      },
-      logoContainer:
-      {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-      },
-      loginContainer:
-      {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-        width: "100%"
-      },
-      bottom:
-      {
-        ...theme.typography.button,
-        padding: theme.spacing.unit.toFixed(),
-        backgroundColor: CustomColors.background1,
-        color: CustomColors.foreground,
-        justifyContent: "center",
-        textAlign: "center",
-        fontSize: 32
-      },
-      textField:
-      {
-        borderColor: CustomColors.background2 + '!important',
-        color: CustomColors.foreground + '!important',
-        padding: 10
-      },
-      typography:
-      {
-        color: CustomColors.foreground + '!important'
+        borderColor: `${CustomColors.darkerFont} !important`,
       }
-    });
+    },
+    textFieldFocused:
+    {
+      color: "orange"
+    },
+    textFieldNotchedOutline:
+    {
+      borderWidth: "1px",
+      borderColor: CustomColors.darkerFont + "!important"
+    },
+    typography:
+    {
+      color: CustomColors.font + "!important"
+    }
+  });
 
-interface IState {
-  email : string;
-  password : string;
+interface IState
+{
+  email: string;
+  password: string;
 }
 
-interface IProps { }
+interface IProps
+{}
 
 class Home extends Connected<typeof React.Component, IProps & WithStyles<typeof styles> & RouteComponentProps<{}>, IState, AppStore>(React.Component)
 {
-  storageService: StorageService = new StorageService();
+    storageService: StorageService = new StorageService();
 
-  constructor(props: IProps & WithStyles<typeof styles> & RouteComponentProps<{}>) {
-    super(props);
+    constructor(props: IProps & WithStyles<typeof styles> & RouteComponentProps<{}>)
+    {
+        super(props);
 
-    this.state = {
-      email: '',
-      password: ''
+        this.state =
+        {
+          email : "",
+          password: ""
+        }
     }
-  }
 
-  componentWillMount() {
-    const storage : StorageService = new StorageService();
-    const token: string | undefined = storage.read<string>(StorageKeys.JWT)
+    componentWillMount()
+    {
+      const storage: StorageService = new StorageService();
 
-    if (token) {
-      // TODO navigate to products
+      const token: string | undefined = storage.read<string>(StorageKeys.JWT);
+
+      if (token)
+      {
+        //todo: navigate to products page
+      }
     }
-  }
 
-  isFormFilled = () : boolean => {
-    return this.state.email.length > 0 &&
-      this.state.password.length > 0 &&
-      Validation.IsEmail(this.state.email);
-  }
+    isFormFilled = (): boolean =>
+    {
+      return this.state.email.length > 0 &&
+             this.state.password.length > 0 &&
+             Validation.IsEmail(this.state.email);
+    }
 
-  onTextChanged = (e : React.ChangeEvent<HTMLInputElement>) : void => {
-    e.preventDefault();
-    this.setState({ [e.target.name]: e.target.value });
-  }
+    onTextChanged = (e: React.ChangeEvent<HTMLInputElement>): void =>
+    {
+      e.preventDefault();
+      this.setState
+      ({
+          [e.target.name]: e.target.value
+      });
+    }
 
-  onLoginClick = async () : Promise<void> => {
-    const data : LoginRequest = { email: this.state.email, jelszo: this.state.password }
-    const token = WebAPI.Security.login(data).then(x => x.Token);
+    onLoginClickHandler = async (): Promise<void> =>
+    {
+      const data: LoginRequest =
+      {
+        email: this.state.email,
+        jelszo: this.state.password
+      };
 
-    if (!token) return;
+      const token = await WebAPI.Security.login(data).then(x => x.Token)
+                                                     .catch();
 
-    const storage: StorageService = new StorageService();
-    storage.write(StorageKeys.JWT, token);
+      if (!token)
+      {
+        return;
+      }
 
-    // todo: navigate to products page
-  }
+      const storage: StorageService = new StorageService();
+      storage.write(StorageKeys.JWT, token);
 
-  render() {
-    const css = this.props.classes;
+      //todo: navigate to products page
+    }
 
-    const loginbutton = this.isFormFilled() ?
-      <Button variant="contained" color="primary">BELÉPÉS</Button> :
-      <Button variant="contained" color="primary" disabled>BELÉPÉS</Button>;
+    render()
+    {
+      const css = this.props.classes;
 
-    const Body = () =>
-      <div className={css.container}>
-        <div className={css.content}>
-          <div className={css.logoContainer}>
-            <img src={LocalImages.images('./bringawebshop.jpg')} alt="" />
+      const loginButton = this.isFormFilled() ?
+      <Button variant="contained" color="primary">
+        BELÉPÉS
+      </Button> :
+      <Button variant="contained" disabled>
+        BELÉPÉS
+      </Button>
+
+      const Body = () =>
+        <div className={css.container}>
+          <div className={css.content}>
+            <div className={css.logoContainer}>
+              <img src={LocalImages.images("./bringawebshop.jpg")} />
+            </div>
+            <div className={css.loginContainer}>
+              <Typography variant="h5"
+                            gutterBottom
+                            className={css.typography}>
+                  BEJELENTKEZÉS
+              </Typography>
+              <Typography variant="overline"
+                          gutterBottom
+                          className={css.typography}>
+                EMAIL
+              </Typography>
+              <TextField InputLabelProps={{
+                          classes: {
+                            root: css.textFieldLabel,
+                            focused: css.textFieldFocused
+                          }
+                        }}
+                        InputProps={{
+                          classes: {
+                            root: css.textFieldOutlinedInput,
+                            focused: css.textFieldFocused,
+                            notchedOutline: css.textFieldNotchedOutline
+                          },
+                        }}
+                        className={css.textField}
+                        name="email"
+                        id="outlined-basic"
+                        label="Email"
+                        variant="outlined"
+                        onChange={this.onTextChanged}/>
+
+              <Typography variant="overline"
+                          gutterBottom
+                          className={css.typography}>
+                JELSZÓ
+              </Typography>
+              <TextField InputLabelProps={{
+                            classes: {
+                              root: css.textFieldLabel,
+                              focused: css.textFieldFocused
+                            }
+                          }}
+                          InputProps={{
+                            classes: {
+                              root: css.textFieldOutlinedInput,
+                              focused: css.textFieldFocused,
+                              notchedOutline: css.textFieldNotchedOutline,
+                            },
+                          }}
+                          className={css.textField}
+                         name="password"
+                         id="outlined-basic"
+                         label="Jelszó"
+                         variant="outlined"
+                         type="password"
+                         onChange={this.onTextChanged}/>
+
+              {loginButton}
+            </div>
           </div>
-          <div className={css.loginContainer}>
-            <Typography className={css.typography} variant="h5">BEJELENTKEZÉS</Typography>
-            <Typography className={css.typography} variant="overline">Email</Typography>
-            <TextField
-              className={css.textField}
-              InputProps={{classes:{notchedOutline: css.textField, input: css.typography }}}
-              id="outlined-basic" variant="outlined" name="email"
-              onChange={this.onTextChanged} />
-            <Typography className={css.typography} variant="overline">Jelszó</Typography>
-            <TextField
-              className={css.textField}
-              InputProps={{classes:{notchedOutline: css.textField, input: css.typography }}}
-              id="outlined-basic" variant="outlined" name="password"
-              onChange={this.onTextChanged}
-              type="password" />
-            {loginbutton}
+          <div className={css.bottom}>
+            <div>Tekerj a ami kerékpárjainkal a zöldebb jövőért!</div>
           </div>
-        </div>
-        <div className={css.bottom}>
-          TEKERJ VELÜNK A ZÖLDEBB JÖVŐÉRT!
-        </div>
-        <FooterComponent/>
-      </div>
-    return Body();
+          <FooterComponent />
+         </div>
+      return Body();
   }
 }
 

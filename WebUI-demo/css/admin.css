@@ -3,3 +3,21 @@
     margin-top: 32px;
     width: 100%;
 }
+
+.col {
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
+.row {
+    position: relative;
+    left: 28%;
+
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}

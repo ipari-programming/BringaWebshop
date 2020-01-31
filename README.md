@@ -10,3 +10,7 @@ npm i
 // Frissítés
 npm update
 ```
+
+## Visszaszámlálás
+
+[🕒](https://www.tickcounter.com/countdown/1742016/my-countdown)

@@ -12,6 +12,7 @@ import { WebAPI } from "./../../services/webAPI";
 import { LoginRequest } from "./../../services/client/securityService";
 import { StorageKeys } from "./../../settings/constats";
 import FooterComponent from "./../footer/footer";
+import { Routes } from "../../routing/urls";
 
 const styles = (theme: Theme) =>
   createStyles
@@ -156,7 +157,7 @@ class Home extends Connected<typeof React.Component, IProps & WithStyles<typeof 
       const storage: StorageService = new StorageService();
       storage.write(StorageKeys.JWT, token);
 
-      //todo: navigate to products page
+      this.props.history.push(Routes.Products);
     }
 
     render()
@@ -164,7 +165,8 @@ class Home extends Connected<typeof React.Component, IProps & WithStyles<typeof 
       const css = this.props.classes;
 
       const loginButton = this.isFormFilled() ?
-      <Button variant="contained" color="primary">
+      <Button variant="contained" color="primary"
+        onClick={this.onLoginClickHandler}>
         BELÉPÉS
       </Button> :
       <Button variant="contained" disabled>

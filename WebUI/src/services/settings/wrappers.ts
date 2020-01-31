@@ -1,5 +1,6 @@
 import { SecurityService } from "./../client/securityService";
 import { UserService } from "../client/userService";
+import { BicycleService } from "../client/bicycleService";
 
 export class SecurityAPI extends SecurityService
 {
@@ -11,6 +12,15 @@ export class SecurityAPI extends SecurityService
 }
 
 export class UserAPI extends UserService
+{
+    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> })
+    {
+        super(baseUrl, http);
+        this.jsonParseReviver = ReviveDateTime;
+    }
+}
+
+export class BicycleAPI extends BicycleService
 {
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> })
     {

@@ -4,6 +4,7 @@ import withRoot from "./../../withRoot";
 import { BicycleResponse } from "../../services/client/bicycleService";
 import { WebAPI } from "../../services/webAPI";
 import BicycleComponent from "../../components/bicycle";
+import { CustomColors } from "../../style/colors";
 
 const styles = (theme: Theme) =>
   createStyles
@@ -11,10 +12,25 @@ const styles = (theme: Theme) =>
     container:
     {
       display: "flex",
+      flexDirection: "column",
       flexGrow: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: CustomColors.background
+    },
+    productContainer:
+    {
+      display: "flex",
+      flexDirection: "row",
+      flexGrow: 1,
+      flexWrap: "wrap",
       justifyContent: "center",
       alignItems: "center"
     },
+    hText:
+    {
+      color: "#33ff00"
+    }
   });
 
 interface IState
@@ -59,10 +75,12 @@ interface IProps
         console.log(bicycles);
 
         const Body = () =>
-            <div className={css.container}>
-              <h1>Termékek</h1>
+        <div className={css.container}>
+          <h1 className={css.hText}>Termékek</h1>
+          <div className={css.productContainer}>
               {bicycles}
-            </div>
+          </div>
+        </div>
 
         return Body();
     }

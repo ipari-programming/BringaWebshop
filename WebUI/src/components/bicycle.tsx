@@ -2,6 +2,7 @@ import * as React from "react";
 import { Theme, createStyles, withStyles, WithStyles } from "@material-ui/core"
 import withRoot from "./../withRoot";
 import { BicycleResponse } from "../services/client/bicycleService";
+import { CustomColors } from "../style/colors";
 
 const styles = (theme: Theme) =>
   createStyles
@@ -20,12 +21,15 @@ const styles = (theme: Theme) =>
         marginTop: 15,
         marginLeft: 30,
         marginRight: 30,
+        marginBottom: 30,
+        borderRadius: 20,
         boxShadow: "5px 5px 20px #33ff00"
     },
     kep:
     {
         width: 300,
         height: 230,
+        borderRadius: 20,
         border: "10px solid #121212"
     },
     cardContainer:
@@ -48,6 +52,7 @@ const styles = (theme: Theme) =>
         marginBottom: 5,
         paddingLeft: 15,
         paddingRight: 15,
+        color: "#5cff33",
         wordBreak: "break-all"
     }
   });

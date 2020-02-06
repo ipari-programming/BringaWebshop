@@ -225,7 +225,7 @@ class Home extends Connected<typeof React.Component, IProps & WithStyles<typeof 
                             classes: {
                               root: css.textFieldOutlinedInput,
                               focused: css.textFieldFocused,
-                              notchedOutline: css.textFieldNotchedOutline,
+                              notchedOutline: css.textFieldNotchedOutline
                             },
                           }}
                           className={css.textField}
@@ -235,12 +235,11 @@ class Home extends Connected<typeof React.Component, IProps & WithStyles<typeof 
                          variant="outlined"
                          type="password"
                          onChange={this.onTextChanged}/>
-
               {loginButton}
             </div>
           </div>
           <div className={css.bottom}>
-            <div>Tekerj a ami kerékpárjainkal a zöldebb jövőért!</div>
+            <div>Tekerj a mi kerékpárjainkal a zöldebb jövőért!</div>
           </div>
           <FooterComponent />
          </div>

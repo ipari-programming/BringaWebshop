@@ -6,6 +6,8 @@ import { StorageService } from "./../../services/client/storage.service";
 import { Routes } from "./../../routing/urls";
 import { RouteComponentProps } from "react-router";
 import { StorageKeys } from "./../../settings/constats";
+import { Connected } from "../../lib/store/connected.mixin";
+import { AppStore } from "../../lib/appStore";
 
 const styles = (theme: Theme) =>
   createStyles
@@ -61,12 +63,13 @@ interface IState
 {
     isLoggedIn: boolean;
     loginStateText: string;
+    cartCount: number;
 }
 
 interface IProps
 {}
 
-  class Header extends React.Component<IProps & WithStyles<typeof styles> & RouteComponentProps<{}>, IState>
+  class Header extends Connected<typeof React.Component, IProps & WithStyles<typeof styles> & RouteComponentProps<{}>, IState, AppStore>(React.Component)
   {
     constructor(props :IProps & WithStyles<typeof styles> & RouteComponentProps)
     {
@@ -75,7 +78,8 @@ interface IProps
         this.state =
         {
             isLoggedIn: true,
-            loginStateText: "KIJELENTKEZÉS"
+            loginStateText: "KIJELENTKEZÉS",
+            cartCount: this.store.state.cart.count()
         }
     }
 

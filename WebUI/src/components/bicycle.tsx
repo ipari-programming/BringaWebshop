@@ -3,6 +3,9 @@ import { Theme, createStyles, withStyles, WithStyles } from "@material-ui/core"
 import withRoot from "./../withRoot";
 import { BicycleResponse } from "../services/client/bicycleService";
 import { CustomColors } from "../style/colors";
+import { Connected } from "../lib/store/connected.mixin";
+import { RouteComponentProps } from "react-router";
+import { AppStore } from "../lib/appStore";
 
 const styles = (theme: Theme) =>
   createStyles
@@ -65,14 +68,23 @@ interface IProps
     bicycle: BicycleResponse;
 }
 
-  class Bicycle extends React.Component<IProps & WithStyles<typeof styles>, IState>
+  class Bicycle extends Connected<typeof React.Component, IProps & WithStyles<typeof styles> & RouteComponentProps<{}>, IState, AppStore>(React.Component)
   {
+    onClickHandler = (): void =>
+    {
+        this.store.update
+        ({
+            ...this.store.state,
+            selectedBicycle: this.props.bicycle
+        });
+    }
+
     render()
     {
         const css = this.props.classes;
 
         const Body = () =>
-            <div className={css.card}>
+            <div className={css.card} onClick={this.onClickHandler}>
                 <img src={this.props.bicycle.URL} className={css.kep} alt=""/>
                 <div className={css.cardContainer}>
                     <h2 className={css.cim}>{this.props.bicycle.Marka}</h2>

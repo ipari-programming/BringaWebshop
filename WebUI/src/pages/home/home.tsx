@@ -118,7 +118,7 @@ class Home extends Connected<typeof React.Component, IProps & WithStyles<typeof 
 
       if (token)
       {
-        //todo: navigate to products page
+        this.props.history.push(Routes.Products);
       }
     }
 
@@ -146,18 +146,18 @@ class Home extends Connected<typeof React.Component, IProps & WithStyles<typeof 
         jelszo: this.state.password
       };
 
-      const token = await WebAPI.Security.login(data).then(x => x.Token)
-                                                     .catch();
-
-      if (!token)
+      const token = await WebAPI.Security.login(data)
+                                         .then(x =>
       {
-        return;
-      }
+        if (x.Token)
+        {
+          const storage: StorageService = new StorageService();
+          storage.write(StorageKeys.JWT, token);
 
-      const storage: StorageService = new StorageService();
-      storage.write(StorageKeys.JWT, token);
-
-      this.props.history.push(Routes.Products);
+          this.props.history.push(Routes.Products);
+        }
+      })
+                                          .catch();
     }
 
     render()

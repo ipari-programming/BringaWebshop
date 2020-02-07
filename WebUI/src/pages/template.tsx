@@ -1,30 +1,30 @@
-/*
-import { Connected } from "../../lib/store/connected.mixin";
 import * as React from "react";
-import { WithStyles, Theme, createStyles, withStyles } from "@material-ui/core";
+import { Connected } from "./../lib/store/connected.mixin";
 import { RouteComponentProps } from "react-router";
-import { AppStore } from "../../lib/appStore";
-import withRoot from "../../withRoot";
+import { AppStore } from "./../lib/appStore";
+import { Theme, createStyles, withStyles, WithStyles, TextField, Typography, Button } from "@material-ui/core"
+import withRoot from "./../withRoot";
+import { Routes } from "./../routing/urls";
 
 const styles = (theme: Theme) =>
   createStyles
-  ({
+  ({})
 
-  });
+interface IState
+{}
 
-  interface IState
-  {}
-  
-  interface IProps
-  {}
+interface IProps
+{}
 
-class TEMPLATE extends Connected<typeof React.Component, IProps & WithStyles<typeof styles> & RouteComponentProps<{}>, IState, AppStore>(React.Component)
+
+class Template extends Connected<typeof React.Component, IProps & WithStyles<typeof styles> & RouteComponentProps<{}>, IState, AppStore>(React.Component)
 {
     constructor(props: IProps & WithStyles<typeof styles> & RouteComponentProps<{}>)
     {
         super(props);
 
-        
+        this.state =
+        {}
     }
 
     render()
@@ -34,10 +34,9 @@ class TEMPLATE extends Connected<typeof React.Component, IProps & WithStyles<typ
         const Body = () =>
             <div></div>
         
-        return Body;
+        return Body();
     }
 }
 
-const TEMPLATEPage = withRoot(withStyles(styles)(TEMPLATE));
-export default TEMPLATEPage;
-*/
+const TemplatePage = withRoot(withStyles(styles)(Template));
+export default TemplatePage;

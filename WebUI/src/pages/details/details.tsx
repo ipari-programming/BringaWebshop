@@ -1,24 +1,23 @@
-import { Connected } from "../../lib/store/connected.mixin";
 import * as React from "react";
-import { WithStyles, Theme, createStyles, withStyles } from "@material-ui/core";
+import { Connected } from "./../../lib/store/connected.mixin";
 import { RouteComponentProps } from "react-router";
-import { AppStore } from "../../lib/appStore";
-import withRoot from "../../withRoot";
-import { BicycleResponse } from "../../services/client/bicycleService";
+import { AppStore } from "./../../lib/appStore";
+import { Theme, createStyles, withStyles, WithStyles, TextField, Typography, Button } from "@material-ui/core"
+import withRoot from "./../../withRoot";
+import { Routes } from "../../routing/urls";
+import { BicycleResponse } from "./../../services/client/bicycleService";
 
 const styles = (theme: Theme) =>
   createStyles
-  ({
+  ({})
 
-  });
+interface IState
+{
+    bicycle: BicycleResponse;
+}
 
-  interface IState
-  {
-      bicycle: BicycleResponse
-  }
-  
-  interface IProps
-  {}
+interface IProps
+{}
 
 class Details extends Connected<typeof React.Component, IProps & WithStyles<typeof styles> & RouteComponentProps<{}>, IState, AppStore>(React.Component)
 {
@@ -28,7 +27,7 @@ class Details extends Connected<typeof React.Component, IProps & WithStyles<type
 
         this.state =
         {
-            bicycle: this.store.state.selectedBicycle
+            bicycle : this.store.state.selectedBicycle
         }
     }
 
@@ -37,9 +36,12 @@ class Details extends Connected<typeof React.Component, IProps & WithStyles<type
         const css = this.props.classes;
 
         const Body = () =>
-            <div></div>
-        
-        return Body;
+            <div>
+                <h1>{this.state.bicycle.Marka}</h1>
+                 <h2>{this.state.bicycle.Tipus}</h2>
+            </div>
+
+        return Body();
     }
 }
 

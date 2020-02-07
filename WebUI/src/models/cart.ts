@@ -1,31 +1,31 @@
-import { BicycleResponse } from "../services/client/bicycleService";
+import { BicycleResponse } from "./../services/client/bicycleService";
 
 export class Cart
 {
-    private bicycles: BicycleResponse[] = [];
+    private _bicycles: BicycleResponse[] = [];
 
     public add = (bicycle: BicycleResponse): void =>
     {
-        this.bicycles.push(bicycle);
+        this._bicycles.push(bicycle);
     }
 
     public remove = (bicycle: BicycleResponse): void =>
     {
-        this.bicycles.remove(bicycle);
+        this._bicycles.remove(bicycle);
     }
 
     public clear = (): void =>
     {
-        this.bicycles = [];
+        this._bicycles = [];
     }
 
     public count = (): number =>
     {
-        return this.bicycles.length;
+        return this._bicycles.length;
     }
 
     public content = (): BicycleResponse[] =>
     {
-        return this.bicycles;
+        return this._bicycles;
     }
 }

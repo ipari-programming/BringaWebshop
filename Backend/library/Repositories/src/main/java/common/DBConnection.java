@@ -11,7 +11,7 @@ public final class DBConnection
     private static String portNumber = "3306";
     private static String databaseName = "kerekpardb";
     private static String userName = "root";
-    private static String password = "rootroot";
+    private static String password = "";
 
     private static String getConnectionUrl()
     {

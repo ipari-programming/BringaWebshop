@@ -73,7 +73,7 @@ const styles = (theme: Theme) =>
     },
     textFieldFocused:
     {
-      color: "orange"
+      color: "orange !important"
     },
     textFieldNotchedOutline:
     {
@@ -200,7 +200,8 @@ class Home extends Connected<typeof React.Component, IProps & WithStyles<typeof 
                           classes: {
                             root: css.textFieldOutlinedInput,
                             focused: css.textFieldFocused,
-                            notchedOutline: css.textFieldNotchedOutline
+                            notchedOutline: css.textFieldNotchedOutline,
+                            input: css.textFieldFocused
                           },
                         }}
                         className={css.textField}
@@ -225,7 +226,8 @@ class Home extends Connected<typeof React.Component, IProps & WithStyles<typeof 
                             classes: {
                               root: css.textFieldOutlinedInput,
                               focused: css.textFieldFocused,
-                              notchedOutline: css.textFieldNotchedOutline
+                              notchedOutline: css.textFieldNotchedOutline,
+                              input: css.textFieldFocused
                             },
                           }}
                           className={css.textField}

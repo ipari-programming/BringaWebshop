@@ -18,12 +18,14 @@ const styles = (theme: Theme) =>
       flexGrow: 1,
       minHeight: 50,
       alignItems: "center",
-      color: "orange"
+      color: "orange",
+      width: "100%"
     },
     navbar:
     {
         padding: "5px",
-        margin: 0
+        margin: 0,
+        width: "100%"
     },
     nav:
     {
@@ -31,7 +33,8 @@ const styles = (theme: Theme) =>
         margin: 0,
         padding: 0,
         overflow: "hidden",
-        backgroundColor: "#121212"
+        backgroundColor: "#121212",
+        width: "100%"
     },
     navItem:
     {
@@ -57,6 +60,11 @@ const styles = (theme: Theme) =>
             backgroundColor: "#33ff00"
         }
     },
+    cart:
+    {
+      display: "float",
+      float: "right"
+    }
   });
 
 interface IState
@@ -103,6 +111,7 @@ interface IProps
                         <li className={css.navItem}><span className={css.navItemLink} onClick={this.logoutClickHandler}>{this.state.loginStateText}</span></li>
                         <li className={css.navItem}><span className={css.navItemLink}>Articles</span></li>
                         <li className={css.navItem}><span className={css.navItemLink}>Admin</span></li>
+                        <li className={css.cart}><span className={css.navItemText}>Kosár ({this.state.cartCount})</span></li>
                     </ul>
                 </div>
             </div>

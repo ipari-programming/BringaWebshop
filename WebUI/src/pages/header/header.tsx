@@ -111,7 +111,7 @@ interface IProps
                         <li className={css.navItem}><span className={css.navItemLink} onClick={this.logoutClickHandler}>{this.state.loginStateText}</span></li>
                         <li className={css.navItem}><span className={css.navItemLink}>Articles</span></li>
                         <li className={css.navItem}><span className={css.navItemLink}>Admin</span></li>
-                        <li className={css.cart}><span className={css.navItemText}>Kosár ({this.state.cartCount})</span></li>
+                        <li className={css.cart}><span className={css.navItemLink}>Kosár ({this.state.cartCount})</span></li>
                     </ul>
                 </div>
             </div>

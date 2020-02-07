@@ -1,12 +1,13 @@
 import * as React from "react";
-import { RouteComponentProps } from "react-router";
 import { Theme, createStyles, withStyles, WithStyles } from "@material-ui/core"
 import withRoot from "./../../withRoot";
+import { StringifyOptions } from "querystring";
 import { StorageService } from "./../../services/client/storage.service";
-import { StorageKeys } from "./../../settings/constats";
 import { Routes } from "./../../routing/urls";
-import { Connected } from "./../../lib/store/connected.mixin";
-import { AppStore } from "./../../lib/appStore";
+import { RouteComponentProps } from "react-router";
+import { StorageKeys } from "./../../settings/constats";
+import { Connected } from "../../lib/store/connected.mixin";
+import { AppStore } from "../../lib/appStore";
 
 const styles = (theme: Theme) =>
   createStyles
@@ -22,7 +23,7 @@ const styles = (theme: Theme) =>
     },
     navbar:
     {
-        padding: 5,
+        padding: "5px",
         margin: 0,
         width: "100%"
     },
@@ -33,6 +34,7 @@ const styles = (theme: Theme) =>
         padding: 0,
         overflow: "hidden",
         backgroundColor: "#121212",
+        width: "100%"
     },
     navItem:
     {
@@ -53,7 +55,6 @@ const styles = (theme: Theme) =>
         textAlign: "center",
         padding: "14px 16px",
         textDecoration: "none",
-
         "&:hover":
         {
             backgroundColor: "#33ff00"
@@ -61,7 +62,8 @@ const styles = (theme: Theme) =>
     },
     cart:
     {
-        float: "right",
+      display: "float",
+      float: "right"
     }
   });
 
@@ -69,7 +71,7 @@ interface IState
 {
     isLoggedIn: boolean;
     loginStateText: string;
-    cartCount: number
+    cartCount: number;
 }
 
 interface IProps
@@ -77,16 +79,15 @@ interface IProps
 
   class Header extends Connected<typeof React.Component, IProps & WithStyles<typeof styles> & RouteComponentProps<{}>, IState, AppStore>(React.Component)
   {
-
-    constructor(props: IProps & WithStyles<typeof styles> & RouteComponentProps<{}>)
+    constructor(props :IProps & WithStyles<typeof styles> & RouteComponentProps)
     {
         super(props);
 
         this.state =
         {
             isLoggedIn: true,
-            loginStateText : "KIJELENTKEZÉS",
-            cartCount : this.store.state.cart.count()
+            loginStateText: "KIJELENTKEZÉS",
+            cartCount: this.store.state.cart.count()
         }
     }
 
@@ -106,25 +107,11 @@ interface IProps
             <div className={css.container}>
                 <div className={css.navbar}>
                     <ul className={css.nav}>
-                        <li className={css.navItem}>
-                            <span className={css.navItemText}>Bringa Webshop</span>
-                        </li>
-                        <li className={css.navItem}>
-                            <span className={css.navItemLink} onClick={this.logoutClickHandler}>
-                                {this.state.loginStateText}
-                            </span>
-                        </li>
-                        <li className={css.navItem}>
-                            <span className={css.navItemLink}>Articles</span>
-                        </li>
-                        <li className={css.navItem}>
-                            <span className={css.navItemLink}>Admin</span>
-                        </li>
-                        <li className={css.cart}>
-                            <span className={css.navItemLink}>
-                                Kosár tartalma:{this.state.cartCount} kerékpár.
-                            </span>
-                        </li>
+                        <li className={css.navItem}><span className={css.navItemText}>Bringa Webshop</span></li>
+                        <li className={css.navItem}><span className={css.navItemLink} onClick={this.logoutClickHandler}>{this.state.loginStateText}</span></li>
+                        <li className={css.navItem}><span className={css.navItemLink}>Articles</span></li>
+                        <li className={css.navItem}><span className={css.navItemLink}>Admin</span></li>
+                        <li className={css.cart}><span className={css.navItemLink}>Kosár ({this.state.cartCount})</span></li>
                     </ul>
                 </div>
             </div>

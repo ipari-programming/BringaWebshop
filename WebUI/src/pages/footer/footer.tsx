@@ -11,8 +11,7 @@ const styles = (theme: Theme) =>
       flexGrow: 1,
       justifyContent: "center",
       minHeight: 50,
-      alignItems: "center",
-      color: "orange"
+      alignItems: "center"
     },
   });
 

@@ -7,9 +7,7 @@ import BicycleComponent from "../../components/bicycle";
 import { CustomColors } from "../../style/colors";
 import HeaderComponent from "../header/header";
 import FooterComponent from "../footer/footer";
-import { Route, RouteComponentProps } from "react-router";
-import { Connected } from "./../../lib/store/connected.mixin";
-import { AppStore } from "./../../lib/appStore";
+import { Route } from "react-router";
 
 const styles = (theme: Theme) =>
   createStyles
@@ -46,7 +44,7 @@ interface IState
 interface IProps
 {}
 
-  class Products extends Connected<typeof React.Component, IProps & WithStyles<typeof styles> & RouteComponentProps<{}>, IState, AppStore>(React.Component)
+  class Products extends React.Component<IProps & WithStyles<typeof styles>, IState>
   {
     constructor(props: IProps & WithStyles<typeof styles>)
     {
@@ -74,8 +72,10 @@ interface IProps
         const css = this.props.classes;
         const bicycles:JSX.Element[] = this.state.bicycles.map
         (
-          x => <Route key={x.Id} render={ props => <BicycleComponent bicycle={x} {...props}/> }/>
+          x => <React.Fragment><BicycleComponent bicycle={x} /></React.Fragment>
         );
+
+        console.log(bicycles);
 
         const Body = () =>
         <div className={css.container}>
@@ -84,7 +84,7 @@ interface IProps
           <div className={css.productContainer}>
               {bicycles}
           </div>
-          <FooterComponent />
+          <FooterComponent/>
         </div>
 
         return Body();

@@ -5,6 +5,9 @@ import { BicycleResponse } from "../../services/client/bicycleService";
 import { WebAPI } from "../../services/webAPI";
 import BicycleComponent from "../../components/bicycle";
 import { CustomColors } from "../../style/colors";
+import HeaderComponent from "../header/header";
+import FooterComponent from "../footer/footer";
+import { Route } from "react-router";
 
 const styles = (theme: Theme) =>
   createStyles
@@ -76,10 +79,12 @@ interface IProps
 
         const Body = () =>
         <div className={css.container}>
+          <Route render={ props => <HeaderComponent {...props}/> }/>
           <h1 className={css.hText}>Termékek</h1>
           <div className={css.productContainer}>
               {bicycles}
           </div>
+          <FooterComponent/>
         </div>
 
         return Body();

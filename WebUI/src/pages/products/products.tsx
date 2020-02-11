@@ -79,9 +79,8 @@ interface IProps
 
         const Body = () =>
         <div className={css.container}>
-        <h1>PRODUCTS</h1>
+        <h1 className={css.hText}>Termékek</h1>
           <Route render={ props => <HeaderComponent {...props}/> }/>
-          <h1 className={css.hText}>Termékek</h1>
           <div className={css.productContainer}>
               {bicycles}
           </div>

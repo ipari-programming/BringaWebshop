@@ -115,10 +115,10 @@ interface IProps
                             </span>
                         </li>
                         <li className={css.navItem}>
-                            <span className={css.navItemLink}>Articles</span>
+                            <span className={css.navItemLink}>Termékek</span>
                         </li>
                         <li className={css.navItem}>
-                            <span className={css.navItemLink}>Admin</span>
+                            <span className={css.navItemLink}>Adminisztrátor felület</span>
                         </li>
                         <li className={css.cart}>
                             <span className={css.navItemLink}>

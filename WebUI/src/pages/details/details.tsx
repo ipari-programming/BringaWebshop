@@ -6,10 +6,25 @@ import { Theme, createStyles, withStyles, WithStyles, TextField, Typography, But
 import withRoot from "./../../withRoot";
 import { Routes } from "../../routing/urls";
 import { BicycleResponse } from "./../../services/client/bicycleService";
+import { CustomColors } from "./../../style/colors";
 
 const styles = (theme: Theme) =>
   createStyles
-  ({})
+  ({
+    container:
+    {
+      display: "flex",
+      flexDirection: "column",
+      flexGrow: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: CustomColors.background
+    },
+    hText:
+    {
+      color: "#33ff00"
+    }
+  });
 
 interface IState
 {
@@ -36,10 +51,10 @@ class Details extends Connected<typeof React.Component, IProps & WithStyles<type
         const css = this.props.classes;
 
         const Body = () =>
-            <div>
-                <h1>DETAILS</h1>
-                <h1>{this.state.bicycle.Marka}</h1>
-                 <h2>{this.state.bicycle.Tipus}</h2>
+            <div className={css.container}>
+                <h1 className={css.hText}>Részletek</h1>
+                <h1 className={css.hText}>{this.state.bicycle.Marka}</h1>
+                 <h2 className={css.hText}>{this.state.bicycle.Tipus}</h2>
             </div>
 
         return Body();

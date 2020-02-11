@@ -28,11 +28,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         return super.authenticationManager();
     }
 
+    @Autowired
+    private CustomAuthenticationEntryPoint authenticationEntryPoint;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
         // Disable CSRF (cross site request forgery)
-        http.csrf().disable();
+        http.httpBasic()
+            .authenticationEntryPoint(authenticationEntryPoint)
+            .and()
+            .csrf()
+            .disable();
 
         // No session will be created or used by spring security
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

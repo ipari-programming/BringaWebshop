@@ -2,10 +2,10 @@ import * as React from "react";
 import { Theme, createStyles, withStyles, WithStyles } from "@material-ui/core"
 import withRoot from "./../withRoot";
 import { BicycleResponse } from "../services/client/bicycleService";
-import { CustomColors } from "../style/colors";
-import { Connected } from "../lib/store/connected.mixin";
+import { Connected } from "./../lib/store/connected.mixin";
 import { RouteComponentProps } from "react-router";
-import { AppStore } from "../lib/appStore";
+import { AppStore } from "./../lib/appStore";
+import { Routes } from "./../routing/urls";
 
 const styles = (theme: Theme) =>
   createStyles
@@ -68,37 +68,46 @@ interface IProps
     bicycle: BicycleResponse;
 }
 
-  class Bicycle extends Connected<typeof React.Component, IProps & WithStyles<typeof styles> & RouteComponentProps<{}>, IState, AppStore>(React.Component)
+class Bicycle extends Connected<typeof React.Component, IProps & WithStyles<typeof styles> & RouteComponentProps<{}>, IState, AppStore>(React.Component)
+{
+  constructor(props: IProps & WithStyles<typeof styles> & RouteComponentProps<{}>)
   {
-    onClickHandler = (): void =>
-    {
-        this.store.update
-        ({
-            ...this.store.state,
-            selectedBicycle: this.props.bicycle
-        });
-    }
-
-    render()
-    {
-        const css = this.props.classes;
-
-        const Body = () =>
-            <div className={css.card} onClick={this.onClickHandler}>
-                <img src={this.props.bicycle.URL} className={css.kep} alt=""/>
-                <div className={css.cardContainer}>
-                    <h2 className={css.cim}>{this.props.bicycle.Marka}</h2>
-                    <h3 className={css.cim}>{this.props.bicycle.Tipus}</h3>
-                    <div className={css.cardText}>
-                        TODO description
-                        IDEA: generate description from data
-                    </div>
-                </div>
-            </div>
-
-        return Body();
-    }
+    super(props);
   }
+
+  onClickHandler = async (): Promise<void> =>
+  {
+    const data: BicycleResponse = this.props.bicycle;
+
+    this.store.update ({
+      selectedBicycle: data
+    });
+
+    this.store.state.cart.add(data);
+
+    this.props.history.push(Routes.Details);
+  }
+
+  render()
+  {
+      const css = this.props.classes;
+
+      const Body = () =>
+          <div className={css.card} onClick={this.onClickHandler}>
+              <img src={this.props.bicycle.URL} className={css.kep} />
+              <div className={css.cardContainer}>
+                  <h2 className={css.cim}>{this.props.bicycle.Marka}</h2>
+                  <h3 className={css.cim}>{this.props.bicycle.Tipus}</h3>
+                  <div className={css.cardText}>
+                      TODO description
+                      IDEA: generate description from data
+                  </div>
+              </div>
+          </div>
+
+      return Body();
+  }
+}
 
 const BicycleComponent = withRoot(withStyles(styles)(Bicycle));
 export default BicycleComponent;

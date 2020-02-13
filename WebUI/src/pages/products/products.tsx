@@ -21,6 +21,8 @@ const styles = (theme: Theme) =>
       flexGrow: 1,
       justifyContent: "center",
       alignItems: "center",
+      height: "100vh",
+      minHeight: "100%",
       backgroundColor: CustomColors.background
     },
     productContainer:

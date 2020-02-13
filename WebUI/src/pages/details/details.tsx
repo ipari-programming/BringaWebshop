@@ -18,6 +18,8 @@ const styles = (theme: Theme) =>
       display: "flex",
       flexDirection: "column",
       flexGrow: 1,
+      height: "100vh",
+      minHeight: "100%",
       backgroundColor: CustomColors.background
     },
     detailsText:

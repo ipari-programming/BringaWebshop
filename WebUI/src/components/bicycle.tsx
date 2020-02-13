@@ -83,8 +83,6 @@ class Bicycle extends Connected<typeof React.Component, IProps & WithStyles<type
       selectedBicycle: data
     });
 
-    this.store.state.cart.add(data);
-
     this.props.history.push(Routes.Details);
   }
 

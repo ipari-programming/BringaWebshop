@@ -98,6 +98,11 @@ interface IProps
         this.props.history.push(Routes.Home);
     }
 
+    productsClickHandler = (): void =>
+    {
+        this.props.history.push(Routes.Products);
+    }
+
     render()
     {
         const css = this.props.classes;
@@ -115,7 +120,7 @@ interface IProps
                             </span>
                         </li>
                         <li className={css.navItem}>
-                            <span className={css.navItemLink}>Termékek</span>
+                            <span className={css.navItemLink} onClick={this.productsClickHandler}>Termékek</span>
                         </li>
                         <li className={css.navItem}>
                             <span className={css.navItemLink}>Adminisztrátor felület</span>

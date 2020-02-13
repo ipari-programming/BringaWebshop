@@ -83,6 +83,12 @@ class Details extends Connected<typeof React.Component, IProps & WithStyles<type
         }
     }
 
+    onClickHandler = () : void =>
+    {
+      this.store.state.cart.add(this.state.bicycle);
+      alert("Tétel hozzáadva a kosárhoz!");
+    }
+
     render()
     {
         const css = this.props.classes;
@@ -95,7 +101,7 @@ class Details extends Connected<typeof React.Component, IProps & WithStyles<type
                     <div className={css.imgContainer}>
                         <img className={css.img} src={this.state.bicycle.URL} />
                         <p className={css.text}>{this.state.bicycle.Ar} HUF</p>
-                        <Button variant="contained" color="primary">
+                        <Button variant="contained" color="primary" onClick={this.onClickHandler}>
                             Kosárba
                         </Button>
                     </div>

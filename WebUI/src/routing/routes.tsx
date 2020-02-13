@@ -17,6 +17,6 @@ export const AppRoutes = () =>
     <React.Fragment>
         <Route exact path={ Urls.home } component={ HomePage } />
         <ProtectedRoute {...defaultProtectedRouteProps} exact path={ Urls.products } component={ ProductsPage } />
-        // <ProtectedRoute {...defaultProtectedRouteProps} exact path={ Urls.details } component={ DetailsPage } />
+        {/* // */} <ProtectedRoute {...defaultProtectedRouteProps} exact path={ Urls.details } component={ DetailsPage } />
         <ProtectedRoute {...defaultProtectedRouteProps} exact path={ Urls.cart } component={ CartPage } />
     </React.Fragment>

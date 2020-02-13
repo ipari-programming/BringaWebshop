@@ -103,6 +103,11 @@ interface IProps
         this.props.history.push(Routes.Products);
     }
 
+    cartClickHandler = (): void =>
+    {
+        this.props.history.push(Routes.Cart);
+    }
+
     render()
     {
         const css = this.props.classes;
@@ -126,7 +131,7 @@ interface IProps
                             <span className={css.navItemLink}>Adminisztrátor felület</span>
                         </li>
                         <li className={css.cart}>
-                            <span className={css.navItemLink}>
+                            <span className={css.navItemLink} onClick={this.cartClickHandler}>
                                 Kosár tartalma:{this.state.cartCount} kerékpár.
                             </span>
                         </li>

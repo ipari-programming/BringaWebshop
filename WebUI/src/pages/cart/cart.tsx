@@ -6,6 +6,8 @@ import { Theme, createStyles, withStyles, WithStyles, TextField, Typography, But
 import withRoot from "./../../withRoot";
 import { Routes } from "./../../routing/urls";
 import HeaderComponent from "../header/header";
+import { BicycleResponse } from "./../../services/client/bicycleService";
+import CartEntryComponent from "./../../components/cartEntry";
 
 const styles = (theme: Theme) =>
   createStyles
@@ -17,7 +19,9 @@ const styles = (theme: Theme) =>
   })
 
 interface IState
-{}
+{
+    bicycles: BicycleResponse[]
+}
 
 interface IProps
 {}
@@ -28,18 +32,20 @@ class Cart extends Connected<typeof React.Component, IProps & WithStyles<typeof 
     constructor(props: IProps & WithStyles<typeof styles> & RouteComponentProps<{}>)
     {
         super(props);
-
-        this.state =
-        {}
     }
 
     render()
     {
         const css = this.props.classes;
+        const bicycles:JSX.Element[] = this.state.bicycles.map
+        (
+          x => <Route key={x.Id} render={ props => <CartEntryComponent bicycle={x} {...props}/> }/>
+        );
 
         const Body = () =>
             <div className={css.container}>
                 <Route render={ props => <HeaderComponent {...props}/> }/>
+                {bicycles}
             </div>
         
         return Body();

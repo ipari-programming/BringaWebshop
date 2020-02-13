@@ -85,8 +85,15 @@ class Details extends Connected<typeof React.Component, IProps & WithStyles<type
 
     onClickHandler = () : void =>
     {
-      this.store.state.cart.add(this.state.bicycle);
+      const data: BicycleResponse = this.state.bicycle;
+
+      this.store.update ({
+        selectedBicycle: data
+      });
+
+      this.store.state.cart.add(data);
       alert("Tétel hozzáadva a kosárhoz!");
+      this.props.history.push(Routes.Cart);
     }
 
     render()

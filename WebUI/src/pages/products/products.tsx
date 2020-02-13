@@ -55,7 +55,7 @@ interface IProps
 
       this.state =
       {
-        bicycles: []
+        bicycles: this.store.state.cart.content()
       }
     }
 

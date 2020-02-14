@@ -9,6 +9,7 @@ import { BicycleResponse } from "./../../services/client/bicycleService";
 import { CustomColors } from "./../../style/colors";
 import HeaderComponent from "./../header/header";
 import FooterComponent from "./../footer/footer";
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 const styles = (theme: Theme) =>
   createStyles
@@ -18,8 +19,7 @@ const styles = (theme: Theme) =>
       display: "flex",
       flexDirection: "column",
       flexGrow: 1,
-      height: "100vh",
-      minHeight: "100%",
+      minHeight: "100vh",
       backgroundColor: CustomColors.background
     },
     detailsText:
@@ -60,6 +60,18 @@ const styles = (theme: Theme) =>
         margin: 20,
         borderRadius: 15,
         border: "1px #000"
+    },
+    icon:
+    {
+      color: "#33ff00",
+      margin: 5,
+      borderColor: "#33ff00",
+      borderWidth: 2,
+      borderStyle: 'solid',
+      borderRadius: '50%',
+      width:'4rem',
+      height:'4rem',
+      padding: 5
     }
   });
 
@@ -92,7 +104,6 @@ class Details extends Connected<typeof React.Component, IProps & WithStyles<type
       });
 
       this.store.state.cart.add(data);
-      alert("Tétel hozzáadva a kosárhoz!");
       this.props.history.push(Routes.Cart);
     }
 
@@ -108,9 +119,7 @@ class Details extends Connected<typeof React.Component, IProps & WithStyles<type
                     <div className={css.imgContainer}>
                         <img className={css.img} src={this.state.bicycle.URL} />
                         <p className={css.text}>{this.state.bicycle.Ar} HUF</p>
-                        <Button variant="contained" color="primary" onClick={this.onClickHandler}>
-                            Kosárba
-                        </Button>
+                        <AddShoppingCartIcon fontSize="large" className={css.icon} onClick={this.onClickHandler}/>
                     </div>
                     <div className={css.detailsContainer}>
                         <h3 className={css.text}>Termék neve: {this.state.bicycle.Marka} {this.state.bicycle.Tipus} bicikli</h3><br/>

@@ -25,6 +25,7 @@
     "isomorphic-fetch": "^2.2.1",
     "jss": "^9.8.7",
     "linq-es5": "^1.11.14",
+    "material-design-icons": "^3.0.1",
     "moment": "^2.24.0",
     "react": "^16.9.0",
     "react-dom": "^16.8.6",

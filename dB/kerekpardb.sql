@@ -851,13 +851,13 @@ INSERT INTO valtok VALUES
 --
 INSERT INTO user VALUES
 (1, 'be5d0cd7-c121-4d29-b939-3cadd483be4e', 'wasyster@gmail.com', 'cGFzc3dvcmQ=', 'ROLE_ADMIN'),
-(2, '1e735fd6-5032-43b8-848c-c1a3de40b8d8', 'elsoegon@test.com', 'password1', 'ROLE_CLIENT'),
-(3, 'da893cb2-f8c7-4a0d-a4b5-8d0543c68867', 'masodikmiksa@test.com', 'password2', 'ROLE_CLIENT'),
-(4, 'a52e9283-793c-41ec-b057-c24b256ed22e', 'harmadikhuba@test.com', 'password3', 'ROLE_CLIENT'),
-(5, '12785bfc-fbef-4256-8118-8ebd2179d2d3', 'negyediknero@test.com', 'password4', 'ROLE_CLIENT'),
-(6, 'd89ecc28-01a0-47eb-8aea-8d5f830f5eed', 'otodikodon@test.com', 'password5', 'ROLE_CLIENT'),
-(7, 'fa2149af-4662-4089-b8de-63402efeb8c9', 'hatodikhanibal@test.com', 'password6', 'ROLE_CLIENT'),
-(8, 'fa8e4ae6-5f54-4640-8f91-71c49a61b3a7', 'hetedikheraclius@test.com', 'password7', 'ROLE_CLIENT'),
+(2, '1e735fd6-5032-43b8-848c-c1a3de40b8d8', 'elsoegon@test.com', 'cGFzc3dvcmQ=', 'ROLE_CLIENT'),
+(3, 'da893cb2-f8c7-4a0d-a4b5-8d0543c68867', 'masodikmiksa@test.com', 'cGFzc3dvcmQ=', 'ROLE_CLIENT'),
+(4, 'a52e9283-793c-41ec-b057-c24b256ed22e', 'harmadikhuba@test.com', 'cGFzc3dvcmQ=', 'ROLE_CLIENT'),
+(5, '12785bfc-fbef-4256-8118-8ebd2179d2d3', 'negyediknero@test.com', 'cGFzc3dvcmQ=', 'ROLE_CLIENT'),
+(6, 'd89ecc28-01a0-47eb-8aea-8d5f830f5eed', 'otodikodon@test.com', 'cGFzc3dvcmQ=', 'ROLE_CLIENT'),
+(7, 'fa2149af-4662-4089-b8de-63402efeb8c9', 'hatodikhanibal@test.com', 'cGFzc3dvcmQ=', 'ROLE_CLIENT'),
+(8, 'fa8e4ae6-5f54-4640-8f91-71c49a61b3a7', 'hetedikheraclius@test.com', 'cGFzc3dvcmQ=', 'ROLE_CLIENT'),
 (9, '93db2b92-7b28-4564-b17f-e26e45d0248c', 'teszt@gmail.com', 'cGFzc3dvcmQ=', 'ROLE_CLIENT');
 
 -- 

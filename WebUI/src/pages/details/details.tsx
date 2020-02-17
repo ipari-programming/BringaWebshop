@@ -104,7 +104,6 @@ class Details extends Connected<typeof React.Component, IProps & WithStyles<type
       });
 
       this.store.state.cart.add(data);
-      this.props.history.push(Routes.Cart);
     }
 
     render()

@@ -1,9 +1,10 @@
 import * as React from "react";
 import { useLocation } from "react-router-dom";
 import { Redirect, Route } from "react-router";
+import * as jwt_decode from "jwt-decode";
 
-import { StorageService } from "./../services/client/storage.service";
-import { StorageKeys } from "./../settings/constats";
+import { StorageService } from "../services/client/storage.service";
+import { StorageKeys } from "../settings/constats";
 import { ProtectedRouteProps } from "./protectedRouteProps";
 
 /*
@@ -11,7 +12,7 @@ usege: <ProtectedRoute {...defaultProtectedRouteProps} exact={true} path="/" com
 use it in route.tsx
 */
 
-export function ProtectedRoute(props: ProtectedRouteProps)
+export function AdmindRoute(props: ProtectedRouteProps)
 {
     const location = useLocation();
     if (props.path !== location.pathname)
@@ -26,7 +27,7 @@ export function ProtectedRoute(props: ProtectedRouteProps)
         return storageService.read<string>(StorageKeys.JWT);
     }
 
-    const isAuthenticated = (): boolean =>
+    const isAdmin = () : boolean =>
     {
         const token: string | undefined = getToken();
 
@@ -35,10 +36,32 @@ export function ProtectedRoute(props: ProtectedRouteProps)
             return false;
         }
 
-        return true;
+        const userInfoJSON = JSON.parse(JSON.stringify(getDecodedAccessToken(token)));
+        const roles: any[] = userInfoJSON.auth;
+
+        if (roles.toEnum().Any(x => x.authority === "ROLE_ADMIN"))
+        {
+            return true;
+        }
+        
+        const storageService: StorageService = new StorageService();
+        storageService.remove(StorageKeys.JWT)
+        return false;
     }
 
-    if (!isAuthenticated())
+    const getDecodedAccessToken = (token: string) =>
+    {
+        try
+        {
+            return jwt_decode(token);
+        }
+        catch (error)
+        {
+            return null;
+        }
+      }
+
+    if (!isAdmin())
     {
         return <Redirect to={{ pathname: props.authenticationPath }}/>;
     }

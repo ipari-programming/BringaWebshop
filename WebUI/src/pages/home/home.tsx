@@ -23,8 +23,7 @@ const styles = (theme: Theme) =>
       flexGrow: 1,
       flexDirection: "column",
       backgroundColor: CustomColors.background,
-      height: "100vh",
-      minHeight: "100%",
+      minHeight: "100vh",
       color: CustomColors.font
     },
     content:

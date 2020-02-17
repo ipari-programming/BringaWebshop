@@ -77,7 +77,6 @@ interface IProps
 
   class Header extends Connected<typeof React.Component, IProps & WithStyles<typeof styles> & RouteComponentProps<{}>, IState, AppStore>(React.Component)
   {
-
     constructor(props: IProps & WithStyles<typeof styles> & RouteComponentProps<{}>)
     {
         super(props);
@@ -88,6 +87,17 @@ interface IProps
             loginStateText : "KIJELENTKEZÉS",
             cartCount : this.store.state.cart.count()
         }
+
+        this.store.state.cart.count$.subscribe((data) =>
+        {
+            this.setState
+            ({
+                ...this.state,
+                cartCount : data
+            });
+
+            console.log("header state: " + this.state.cartCount);
+        });
     }
 
     logoutClickHandler = (): void =>
@@ -111,6 +121,7 @@ interface IProps
     render()
     {
         const css = this.props.classes;
+        const cartCount = this.state.cartCount;
 
         const Body = () =>
             <div className={css.container}>
@@ -125,14 +136,14 @@ interface IProps
                             </span>
                         </li>
                         <li className={css.navItem}>
-                            <span className={css.navItemLink} onClick={this.productsClickHandler}>Termékek</span>
+                        <span className={css.navItemLink} onClick={this.productsClickHandler}>Termékek</span>
                         </li>
                         <li className={css.navItem}>
                             <span className={css.navItemLink}>Adminisztrátor felület</span>
                         </li>
                         <li className={css.cart}>
                             <span className={css.navItemLink} onClick={this.cartClickHandler}>
-                                Kosár tartalma:{this.state.cartCount} kerékpár.
+                                Kosár tartalma:{cartCount} kerékpár.
                             </span>
                         </li>
                     </ul>

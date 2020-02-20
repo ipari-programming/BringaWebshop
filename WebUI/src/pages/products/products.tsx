@@ -81,11 +81,11 @@ interface IProps
         const Body = () =>
         <div className={css.container}>
         <h1 className={css.hText}>Termékek</h1>
-          <Route render={ props => <HeaderComponent {...props}/> }/>
-          <div className={css.productContainer}>
-              {bicycles}
-          </div>
-          <FooterComponent />
+        <Route render={ props => <HeaderComponent {...props}/> }/>
+        <div className={css.productContainer}>
+            {bicycles}
+        </div>
+        <FooterComponent />
         </div>
 
         return Body();

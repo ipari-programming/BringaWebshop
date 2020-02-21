@@ -71,6 +71,7 @@ interface IState
     loginStateText: string;
     cartCount: number
 }
+const baseUrl = "localhost:7777";
 
 interface IProps
 {}
@@ -85,7 +86,7 @@ interface IProps
         {
             isLoggedIn: true,
             loginStateText : "KIJELENTKEZÉS",
-            cartCount : this.store.state.cart.count()
+            cartCount : this.store.state.cart.content().length
         }
 
         this.store.state.cart.count$.subscribe((data) =>

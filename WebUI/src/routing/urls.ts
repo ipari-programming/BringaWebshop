@@ -1,3 +1,5 @@
+const baseUrl = "localhost:7777";
+
 export enum Routes
 {
     //public

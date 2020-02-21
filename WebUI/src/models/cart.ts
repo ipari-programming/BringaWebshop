@@ -25,12 +25,13 @@ export class Cart
         this._bicycles = [];
     }
 
-    public count = (): number =>
-    {
-        return this._bicycles.length;
-    }
     public content = (): BicycleResponse[] =>
     {
         return this._bicycles;
+    }
+
+    public sum = (): number =>
+    {
+        return this._bicycles.toEnum().Sum(x => x.Ar!);
     }
 }

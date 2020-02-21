@@ -68,8 +68,6 @@ class Admin extends Connected<typeof React.Component, IProps & WithStyles<typeof
             <h1 className={css.hText}>Admin</h1>
             <Route render={ props => <HeaderComponent {...props}/> }/>
             <h3 className={css.action} onClick={this.createClickHandler}>Product Create</h3>
-            <h3 className={css.action}>Update</h3>
-            <h3 className={css.action}>Delete</h3>
             <FooterComponent />
             </div>
         

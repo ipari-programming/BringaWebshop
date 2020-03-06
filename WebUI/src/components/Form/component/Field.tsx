@@ -8,8 +8,10 @@ import { IValues } from "./../interfaces/IValues";
 import InputLabel from "@material-ui/core/InputLabel";
 import TextField from "@material-ui/core/TextField";
 import { Select, GenericSelect } from "./Select/select.generic";
-import { RadioGroup, FormControlLabel, Checkbox, Theme, createStyles } from "@material-ui/core";
+import { RadioGroup, FormControlLabel, Checkbox, Button } from "@material-ui/core";
 import RadioComponent from "./Radio/radio.styled";
+import PhotoCamera from "@material-ui/icons/PhotoCamera";
+import IconButton from "@material-ui/core/IconButton";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -165,6 +167,32 @@ export const Field: React.SFC<IFieldProps> = ({
               }}
               minDate={new Date(0, 0, 0, 0, 0, 0, 0)}
               disabledKeyboardNavigation />
+          )}
+
+          {editor!.toLowerCase() === "image" && (
+            <div>
+              <input
+                accept="image/*"
+                style={{display: "none"}} 
+                id={id}
+                name={id}
+                multiple
+                type="file"
+                onChange={ (e:React.ChangeEvent<HTMLInputElement>) =>
+                {
+                  context!.setValues({ [id]: e.currentTarget.value });
+                }}
+                onBlur={() => context!.validate(id)}
+              />
+              <label htmlFor={id}>
+                <IconButton color="primary" aria-label="upload picture" component="span">
+                  <PhotoCamera />
+                </IconButton>
+              </label>
+              <div style={{ color: "blue", fontSize: "70%" }}>
+                  <p>{context!.values[id]}</p>
+              </div>
+            </div>
           )}
           
           {getError(context!.errors) && (

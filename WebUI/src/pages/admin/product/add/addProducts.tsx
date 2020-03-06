@@ -131,9 +131,9 @@ class AddProduct extends Connected<typeof React.Component, IProps & WithStyles<t
         
         if (bicycle)
         {
-            alert("kész tes");
+            alert("A terméket a kosárhoz adta!");
         }
-        else alert("rip");
+        else alert("A termék hozzáadása nem sikerült!");
     }
 
     render()
@@ -151,7 +151,7 @@ class AddProduct extends Connected<typeof React.Component, IProps & WithStyles<t
 
         const Body = () =>
             <div className={css.container}>
-            <h1 className={css.hText}>Add Products</h1>
+            <h1 className={css.hText}>Termék hozzáadáss</h1>
             <Route render={ props => <HeaderComponent {...props}/> }/>
               <TextField InputLabelProps={{
                           classes: {

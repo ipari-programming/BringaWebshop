@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useLocation } from "react-router-dom";
-import { Redirect, Route } from "react-router";
+import { Redirect, Route, RouteComponentProps } from "react-router";
 
 import { StorageService } from "./../services/client/storage.service";
 import { StorageKeys } from "./../settings/constats";
@@ -12,7 +12,7 @@ use it in route.tsx
 */
 
 export function ProtectedRoute(props: ProtectedRouteProps)
-{
+{   
     const location = useLocation();
     if (props.path !== location.pathname)
     {
@@ -44,6 +44,6 @@ export function ProtectedRoute(props: ProtectedRouteProps)
     }
     else
     {
-        return <Route {...props}/>;
+        return <Route exact {...props}/>;
     }
 }

@@ -1,11 +1,9 @@
 import * as React from "react";
 import { useLocation } from "react-router-dom";
 import { Redirect, Route } from "react-router";
-import * as jwt_decode from "jwt-decode";
 
-import { StorageService } from "../services/client/storage.service";
-import { StorageKeys } from "../settings/constats";
 import { ProtectedRouteProps } from "./protectedRouteProps";
+import { isAdmin } from "./../services/client/roleService";
 
 /*
 usege: <ProtectedRoute {...defaultProtectedRouteProps} exact={true} path="/" component = { ProtectedContainer } />
@@ -19,47 +17,6 @@ export function AdmindRoute(props: ProtectedRouteProps)
     {
         return null;
     }
-
-    const getToken = (): string | undefined =>
-    {
-        const storageService: StorageService = new StorageService();
-
-        return storageService.read<string>(StorageKeys.JWT);
-    }
-
-    const isAdmin = () : boolean =>
-    {
-        const token: string | undefined = getToken();
-
-        if (token === undefined || token === null)
-        {
-            return false;
-        }
-
-        const userInfoJSON = JSON.parse(JSON.stringify(getDecodedAccessToken(token)));
-        const roles: any[] = userInfoJSON.auth;
-
-        if (roles.toEnum().Any(x => x.authority === "ROLE_ADMIN"))
-        {
-            return true;
-        }
-        
-        const storageService: StorageService = new StorageService();
-        storageService.remove(StorageKeys.JWT)
-        return false;
-    }
-
-    const getDecodedAccessToken = (token: string) =>
-    {
-        try
-        {
-            return jwt_decode(token);
-        }
-        catch (error)
-        {
-            return null;
-        }
-      }
 
     if (!isAdmin())
     {

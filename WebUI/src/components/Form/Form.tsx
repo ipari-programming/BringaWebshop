@@ -5,6 +5,7 @@ import { IErrors } from "./interfaces/IErrors";
 import { IValues } from "./interfaces/IValues";
 import { IFormContext, FormContext } from "./interfaces/IFormContext";
 import { IFormProps } from "./interfaces/IFormProps ";
+import { IValidation } from "./interfaces/IValidation";
 
 export class Form extends React.Component<IFormProps, IFormState>
 {
@@ -83,9 +84,15 @@ export class Form extends React.Component<IFormProps, IFormState>
     {
       let newError: string = "";
 
-      if (this.props.fields[fieldName] && this.props.fields[fieldName].validation)
+      if (this.props.fields[fieldName] && this.props.fields[fieldName].validation && this.props.fields[fieldName].validation!.length > 0)
       {
-        newError = this.props.fields[fieldName].validation!.rule(this.state.values, fieldName, this.props.fields[fieldName].validation!.args);
+        const validators: IValidation[] = this.props.fields[fieldName].validation!;
+
+        validators.map( validator => 
+          {newError = validator.rule(this.state.values, fieldName, validator.args);
+            console.log(newError);}
+        );
+        
       }
 
       this.state.errors[fieldName] = newError;
@@ -133,8 +140,6 @@ export class Form extends React.Component<IFormProps, IFormState>
           ...values
         }
       });
-
-      console.log("state: " + JSON.stringify(this.state));
     };
 
     public render()

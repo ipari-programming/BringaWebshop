@@ -19,7 +19,9 @@ export interface IFieldProps
     value?: any;
   
     /* The field validator function and argument */
-    validation?: IValidation;
+    /* Validators use rule: the hieghest priprity is the one that is most specific */
+    /* Use first the most specific and go to most generic  */
+    validation?: IValidation[];
 
     /* selectData is an array of obejcts that has an `Id` and `Name` field */
     /* The field is used to populate select with generic type*/

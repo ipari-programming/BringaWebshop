@@ -4,9 +4,10 @@ import { Theme, createStyles, withStyles, WithStyles } from "@material-ui/core"
 import withRoot from "./../../withRoot";
 import { StorageService } from "./../../services/client/storage.service";
 import { StorageKeys } from "./../../settings/constats";
-import { Routes } from "./../../routing/urls";
+import { Routes, Urls } from "./../../routing/urls";
 import { Connected } from "./../../lib/store/connected.mixin";
 import { AppStore } from "./../../lib/appStore";
+import { url } from "inspector";
 
 const styles = (theme: Theme) =>
   createStyles
@@ -71,7 +72,6 @@ interface IState
     loginStateText: string;
     cartCount: number
 }
-const baseUrl = "localhost:7777";
 
 interface IProps
 {}
@@ -106,22 +106,21 @@ interface IProps
         const storage: StorageService = new StorageService();
         storage.remove(StorageKeys.JWT);
 
-        this.props.history.push(Routes.Home);
+        this.props.history.push(Urls.home);
     }
 
     productsClickHandler = (): void =>
     {
-        this.props.history.push(Routes.Products);
+        this.props.history.push(Urls.products);
     }
-
     cartClickHandler = (): void =>
     {
-        this.props.history.push(Routes.Cart);
+        this.props.history.push(Urls.cart);
     }
 
     adminClickHandler = (): void =>
     {
-        this.props.history.push(Routes.Admin);
+        this.props.history.push(Urls.addProduct);
     }
 
     render()

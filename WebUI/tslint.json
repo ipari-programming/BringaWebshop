@@ -1,6 +1,5 @@
 {
   "defaultSeverity": "warning",
-  "extends": ["tslint-config-airbnb"],
   "rules": 
   {
     "variable-name": [false, "ban-keywords", "check-format", "allow-pascal-case"],
@@ -40,6 +39,11 @@
     "block-spacing": false,
     "one-variable-per-declaration": true,
     "no-eval": false,
-    "quotemark": [true, "double", "avoid-escape", "jsx-double"]
+    "quotemark": [true, "double", "avoid-escape", "jsx-double"],
+
+    "object-literal-sort-keys": false,
+    "member-ordering": false,
+    "jsx-no-lambda": false,
+    "no-console": false
   }
 }

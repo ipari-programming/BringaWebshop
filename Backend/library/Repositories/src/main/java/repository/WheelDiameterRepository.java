@@ -23,7 +23,7 @@ public class WheelDiameterRepository implements IWheelDiameterRepository {
 
         CallableStatement stmt = connection.prepareCall(SQL);
         stmt.setInt(1, wheelDiameterEntity.Id);
-        stmt.setString(2, wheelDiameterEntity.Size);
+        stmt.setString(2, wheelDiameterEntity.Name);
 
 
 
@@ -44,7 +44,7 @@ public class WheelDiameterRepository implements IWheelDiameterRepository {
         String SQL = "{ CALL WheelDiameterUpdate(?, ?) }";
         CallableStatement stmt = connection.prepareCall(SQL);
         stmt.setInt("paramId", wheelDiameterEntity.Id);
-        stmt.setString("paramSize", wheelDiameterEntity.Size);
+        stmt.setString("paramSize", wheelDiameterEntity.Name);
 
         int affectedRows  = stmt.executeUpdate();
 
@@ -121,7 +121,7 @@ public class WheelDiameterRepository implements IWheelDiameterRepository {
     {
         WheelDiameterEntity wheelDiameterEntity = new WheelDiameterEntity();
         wheelDiameterEntity.Id = Integer.parseInt(dataSet.getString("Id"));
-        wheelDiameterEntity.Size = dataSet.getString("meret");
+        wheelDiameterEntity.Name = dataSet.getString("meret");
 
         return  wheelDiameterEntity;
     }

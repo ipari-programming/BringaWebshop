@@ -2,14 +2,14 @@ package entity;
 
 public class WheelDiameterEntity {
     public int Id;
-    public String Size;
+    public String Name;
 
     public WheelDiameterEntity() {
     }
 
-    public WheelDiameterEntity(int id, String size) {
+    public WheelDiameterEntity(int id, String name) {
         Id = id;
-        Size = size;
+        Name = name;
     }
 
     public int getId() {
@@ -20,11 +20,11 @@ public class WheelDiameterEntity {
         Id = id;
     }
 
-    public String getSize() {
-        return Size;
+    public String getName() {
+        return Name;
     }
 
-    public void setSize(String size) {
-        Size = size;
+    public void setName(String name) {
+        Name = name;
     }
 }

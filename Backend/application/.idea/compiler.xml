@@ -6,10 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="WebAPI" />
+        <module name="Services" />
         <module name="Infrastructure" />
         <module name="Models" />
-        <module name="Services" />
+        <module name="WebAPI" />
         <module name="Repositories" />
       </profile>
     </annotationProcessing>

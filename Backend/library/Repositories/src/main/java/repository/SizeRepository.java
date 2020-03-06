@@ -23,7 +23,7 @@ public class SizeRepository implements ISizeRepository {
 
         CallableStatement stmt = connection.prepareCall(SQL);
         stmt.setInt(1, sizeEntity.Id);
-        stmt.setString(2, sizeEntity.Size);
+        stmt.setString(2, sizeEntity.Name);
 
 
 
@@ -44,7 +44,7 @@ public class SizeRepository implements ISizeRepository {
         String SQL = "{ CALL FrameSizeUpdate(?, ?) }";
         CallableStatement stmt = connection.prepareCall(SQL);
         stmt.setInt("paramId", sizeEntity.Id);
-        stmt.setString("paramMeret", sizeEntity.Size);
+        stmt.setString("paramMeret", sizeEntity.Name);
 
 
         int affectedRows  = stmt.executeUpdate();
@@ -122,8 +122,7 @@ public class SizeRepository implements ISizeRepository {
     {
         SizeEntity sizeEntity = new SizeEntity();
         sizeEntity.Id = Integer.parseInt(dataSet.getString("id"));
-        sizeEntity.Size = dataSet.getString("meret");
-
+        sizeEntity.Name = dataSet.getString("meret");
         return  sizeEntity;
     }
 

@@ -67,7 +67,7 @@ public class ShifterRepository implements IShifterRepository {
     {
         ShifterEntity shifterEntity = new ShifterEntity();
         shifterEntity.Id = Integer.parseInt(dataSet.getString("id"));
-        shifterEntity.Shifter = dataSet.getString("tipus");
+        shifterEntity.Name = dataSet.getString("tipus");
 
         return  shifterEntity;
     }

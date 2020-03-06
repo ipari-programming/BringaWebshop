@@ -2,14 +2,14 @@ package entity;
 
 public class TypeEntity {
     public int Id;
-    public String Type;
+    public String Name;
 
     public TypeEntity() {
     }
 
-    public TypeEntity(int id, String type) {
+    public TypeEntity(int id, String name) {
         Id = id;
-        Type = type;
+        Name = name;
     }
 
     public int getId() {
@@ -20,11 +20,11 @@ public class TypeEntity {
         Id = id;
     }
 
-    public String getType() {
-        return Type;
+    public String getName() {
+        return Name;
     }
 
-    public void setType(String type) {
-        Type = type;
+    public void setName(String name) {
+        Name = name;
     }
 }

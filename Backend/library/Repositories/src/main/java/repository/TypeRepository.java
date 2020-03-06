@@ -23,7 +23,7 @@ public class TypeRepository implements ITypeRepository {
 
         CallableStatement stmt = connection.prepareCall(SQL);
         stmt.setInt(1, typeEntity.Id);
-        stmt.setString(2, typeEntity.Type);
+        stmt.setString(2, typeEntity.Name);
 
 
         ResultSet resultSets  = stmt.executeQuery();
@@ -43,7 +43,7 @@ public class TypeRepository implements ITypeRepository {
         String SQL = "{ CALL TypeUpdate(?, ?) }";
         CallableStatement stmt = connection.prepareCall(SQL);
         stmt.setInt("paramId", typeEntity.Id);
-        stmt.setString("paramTipus", typeEntity.Type);
+        stmt.setString("paramTipus", typeEntity.Name);
 
 
         int affectedRows  = stmt.executeUpdate();
@@ -121,7 +121,7 @@ public class TypeRepository implements ITypeRepository {
     {
         TypeEntity typeEntity = new TypeEntity();
         typeEntity.Id = Integer.parseInt(dataSet.getString("id"));
-        typeEntity.Type = dataSet.getString("tipus");
+        typeEntity.Name = dataSet.getString("tipus");
 
         return  typeEntity;
     }

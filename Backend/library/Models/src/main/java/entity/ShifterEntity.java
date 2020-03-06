@@ -2,14 +2,14 @@ package entity;
 
 public class ShifterEntity {
     public int Id;
-    public String Shifter;
+    public String Name;
 
     public ShifterEntity() {
     }
 
-    public ShifterEntity(int id, String shifter) {
+    public ShifterEntity(int id, String name) {
         Id = id;
-        Shifter = shifter;
+        Name = name;
     }
 
     public int getId() {
@@ -20,11 +20,11 @@ public class ShifterEntity {
         Id = id;
     }
 
-    public String getShifter() {
-        return Shifter;
+    public String getName() {
+        return Name;
     }
 
-    public void setShifter(String shifter) {
-        Shifter = shifter;
+    public void setName(String name) {
+        Name = name;
     }
 }

@@ -25,5 +25,5 @@ export interface IFieldProps
 
     /* selectData is an array of obejcts that has an `Id` and `Name` field */
     /* The field is used to populate select with generic type*/
-    selectData?: {Id: number, Name: string}[];
+    selectData?: {Id: number | undefined, Name: string | undefined}[];
   }

@@ -53,7 +53,7 @@ export const Field: React.SFC<IFieldProps> = ({
   /*
   *  Creates the generic select element that datasource implement {Id: number, Name: string} fields
   */
-  const SelectElement: Select<{Id: number, Name: string}> = GenericSelect;
+  const SelectElement: Select<{Id: number | undefined, Name: string | undefined}> = GenericSelect;
 
   function formatDate(date: Date) : string
   {
@@ -110,10 +110,10 @@ export const Field: React.SFC<IFieldProps> = ({
               name={id}
               selectedValue={value}
               data={selectData ? selectData! : []}
-              onChange={(e: {Id: number, Name: string}) => context!.setValues({ [id]: e.Name }) }
+              onChange={(e: {Id: number | undefined, Name: string | undefined}) => context!.setValues({ [id]: e.Name! }) }
               onBlur={() => context!.validate(id)}
-              displayMember={x => x.Name}
-              valueMember={x => x.Id.toString()}
+              displayMember={x => x.Name!}
+              valueMember={x => x.Id!.toString()}
               style={getEditorStyle(context!.errors)}
             />
           )}

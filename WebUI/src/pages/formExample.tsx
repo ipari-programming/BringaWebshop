@@ -22,7 +22,17 @@ interface IState
 interface IProps
 {}
 
-enum FieldTypes{ name ="Name", email = "Email", reason = "Reason", sex="Sex", notes = "Notes", agree="Agree", startDate="StartDate", endDate="EndDate" }
+enum FieldTypes
+{ 
+    name ="Name",
+    email = "Email",
+    reason = "Reason",
+    sex="Sex",
+    notes = "Notes",
+    agree="Agree",
+    startDate="StartDate",
+    endDate="EndDate"
+}
 
 class ExampleForm extends Connected<typeof React.Component, IProps & WithStyles<typeof styles> & RouteComponentProps<{}>, IState, AppStore>(React.Component)
 {   

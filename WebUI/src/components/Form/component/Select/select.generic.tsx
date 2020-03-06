@@ -22,7 +22,7 @@ const inputLabel: React.CSSProperties =
     marginBottom: 5
 }
 
-export interface SelectProps<TItem extends {Id: number, Name: string}>
+export interface SelectProps<TItem extends {Id: number | undefined, Name: string | undefined}>
 {
     id: string;
     data: Array<TItem>;
@@ -37,9 +37,9 @@ export interface SelectProps<TItem extends {Id: number, Name: string}>
     className?: string;
 }
 
-export type Select<TItem extends {Id: number, Name: string}> = new(props: SelectProps<TItem>) => GenericSelect<TItem>;
+export type Select<TItem extends {Id: number | undefined, Name: string | undefined}> = new(props: SelectProps<TItem>) => GenericSelect<TItem>;
 
-export class GenericSelect<TItem extends {Id: number, Name: string}> extends React.Component<SelectProps<TItem>, {}>
+export class GenericSelect<TItem extends {Id: number | undefined, Name: string | undefined}> extends React.Component<SelectProps<TItem>, {}>
 {
     private onChange(e: React.ChangeEvent<HTMLSelectElement>)
     {

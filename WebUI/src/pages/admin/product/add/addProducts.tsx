@@ -10,6 +10,13 @@ import HeaderComponent from "./../../../../pages/header/header";
 import FooterComponent from "./../../../../pages/footer/footer";
 import { BicycleEntity } from "./../../../../services/client/bicycleService";
 import { WebAPI } from "./../../../../services/webAPI";
+import { Form } from "./../../../../components/Form/Form";
+import { Field } from "./../../../../components/Form/component/Field";
+import { IFields } from "./../../../../components/Form/interfaces/IFields";
+import { required } from "./../../../../components/Form/validators/required";
+import { minLength } from "./../../../../components/Form/validators/minLength";
+import { BrandEntity } from "./../../../../services/client/brandService";
+import { async } from "q";
 
 const styles = (theme: Theme) =>
   createStyles
@@ -23,305 +30,137 @@ const styles = (theme: Theme) =>
       alignItems: "center",
       minHeight: "100vh",
       backgroundColor: CustomColors.background
-    },
-    hText:
-    {
-      color: "#33ff00"
-    },
-    textField:
-    {
-      width: "90%"
-    },
-    textFieldLabel:
-    {
-      color : `${CustomColors.darkerFont} !important`,
-    },
-    textFieldOutlinedInput:
-    {
-      "&$cssFocused $notchedOutline":
-      {
-        borderColor: `${CustomColors.darkerFont} !important`,
-      }
-    },
-    textFieldFocused:
-    {
-      color: "orange !important"
-    },
-    textFieldNotchedOutline:
-    {
-      borderWidth: "1px",
-      borderColor: CustomColors.darkerFont + "!important"
     }
   })
 
 interface IState
-{
-    cikkszam: string;
-    markaId: number;
-    vazmeretId: number;
-    felniAtmeroId: number;
-    valtoTipus: number;
-    tipusId: number;
-    ar: number;
-    url: string;
-}
+{}
 
 interface IProps
 {}
 
+enum FieldTypes
+{ 
+  cikkszam = "Cikkszam",
+  marka = "Marka",
+  vazmeret = "Vaz meret",
+  felniAtmero = "Felni Atmero",
+  valtoTipus = "Valto Tipus",
+  tipus = "Tipus",
+  ar = "Ar",
+  url ="Url"
+}
+
 class AddProduct extends Connected<typeof React.Component, IProps & WithStyles<typeof styles> & RouteComponentProps<{}>, IState, AppStore>(React.Component)
 {
+    private form : React.RefObject<Form> = React.createRef<Form>();
+
     constructor(props: IProps & WithStyles<typeof styles> & RouteComponentProps<{}>)
     {
         super(props);
 
         this.state =
-        {
-            cikkszam : "",
-            markaId : 0,
-            vazmeretId : 0,
-            felniAtmeroId: 0,
-            valtoTipus: 0,
-            tipusId: 0,
-            ar: 0,
-            url: ""
-        }
+        {}
     }
 
-    isFormFilled = (): boolean =>
+    getBrands = async (): Promise<BrandEntity[]> =>
     {
-        return this.state.cikkszam.length == 16 &&
-               this.state.markaId !=0 &&
-               this.state.vazmeretId !=0 &&
-               this.state.felniAtmeroId !=0 &&
-               this.state.valtoTipus !=0 &&
-               this.state.tipusId !=0 &&
-               this.state.ar > 0 &&
-               this.state.url != "";
+      const brands: BrandEntity[] = await WebAPI.Brand.all().then(x => x);
+      return brands;
     }
 
-    onTextChanged = (e: React.ChangeEvent<HTMLInputElement>): void =>
+    private fields: IFields =
     {
-      e.preventDefault();
-      this.setState
-      ({
-          [e.target.name]: e.target.value
-      });
-    }
+        cikkszam:
+        {
+            id: FieldTypes.cikkszam.toString(),
+            label: "Cikkszám",
+            validation: [{ rule: required }]
+        },
+        marka:
+        {
+            id: FieldTypes.marka.toString(),
+            label: "Márka",
+            editor: "dropdown",
+            selectData: this.getBrands().then(x => x)
+        },
+        vazmeret:
+        {
+            id: FieldTypes.vazmeret.toString(),
+            label: "Váz méret",
+            editor: "dropdown",
+            selectData: []
+        },
+        felniAtmero:
+        {
+          id: FieldTypes.felniAtmero.toString(),
+          label: "Felni átmérő",
+          editor: "dropdown",
+          selectData: []
+        },
+        valtoTipus:
+        {
+          id: FieldTypes.valtoTipus.toString(),
+          label: "Valto típus",
+          editor: "dropdown",
+          selectData: []
+        },
+        tipus:
+        {
+          id: FieldTypes.tipus.toString(),
+          label: "Típus",
+          editor: "dropdown",
+          selectData: []
+        },
+        ar:
+        {
+          id: FieldTypes.ar.toString(),
+          label: "Ár",
+          validation: [{ rule: minLength, args: 1000}]
+        },
+        url:
+        {
+            id: FieldTypes.url.toString(),
+            label: "Kép",
+        },
+    };
 
-    onAddProductClickHandler = async (): Promise<void> =>
+    submit = async (): Promise<void> =>
     {
-        const data: BicycleEntity =
-        {
-            Ar : this.state.ar,
-            Cikkszam : this.state.cikkszam,
-            FelniAtmeroID: this.state.felniAtmeroId,
-            MarkaID: this.state.markaId,
-            TipusID: this.state.tipusId,
-            URL: this.state.url,
-            ValtoTipus: this.state.valtoTipus,
-            VazmeretID: this.state.vazmeretId
-        };
-
-        const bicycle = await WebAPI.Bicycle.create(data)
-                                         .then(x => x)
-                                         .catch();
-
-        console.log(bicycle);
-        
-        if (bicycle)
-        {
-            alert("A terméket a kosárhoz adta!");
-        }
-        else alert("A termék hozzáadása nem sikerült!");
+        //TODO: delete console.log
+        const data = {...this.form.current!.state!.values};
+        console.log(data);
     }
 
     render()
     {
         const css = this.props.classes;
 
-        const loginButton = this.isFormFilled() ?
-        <Button variant="contained" color="primary"
-            onClick={this.onAddProductClickHandler}>
-            FELVITEL
-        </Button> :
-        <Button variant="contained" disabled>
-            FELVITEL
-        </Button>
-
         const Body = () =>
-            <div className={css.container}>
-            <h1 className={css.hText}>Termék hozzáadáss</h1>
-            <Route render={ props => <HeaderComponent {...props}/> }/>
-              <TextField InputLabelProps={{
-                          classes: {
-                            root: css.textFieldLabel,
-                            focused: css.textFieldFocused
-                          }
-                        }}
-                        InputProps={{
-                          classes: {
-                            root: css.textFieldOutlinedInput,
-                            focused: css.textFieldFocused,
-                            notchedOutline: css.textFieldNotchedOutline,
-                            input: css.textFieldFocused
-                          },
-                        }}
-                        className={css.textField}
-                        name="cikkszam"
-                        id="outlined-basic"
-                        label="Cikkszám"
-                        variant="outlined"
-                        onChange={this.onTextChanged}/>
-                <TextField InputLabelProps={{
-                          classes: {
-                            root: css.textFieldLabel,
-                            focused: css.textFieldFocused
-                          }
-                        }}
-                        InputProps={{
-                          classes: {
-                            root: css.textFieldOutlinedInput,
-                            focused: css.textFieldFocused,
-                            notchedOutline: css.textFieldNotchedOutline,
-                            input: css.textFieldFocused
-                          },
-                        }}
-                        className={css.textField}
-                        type="number"
-                        name="markaId"
-                        id="outlined-basic"
-                        label="Márka ID"
-                        variant="outlined"
-                        onChange={this.onTextChanged}/>
-                <TextField InputLabelProps={{
-                          classes: {
-                            root: css.textFieldLabel,
-                            focused: css.textFieldFocused
-                          }
-                        }}
-                        InputProps={{
-                          classes: {
-                            root: css.textFieldOutlinedInput,
-                            focused: css.textFieldFocused,
-                            notchedOutline: css.textFieldNotchedOutline,
-                            input: css.textFieldFocused
-                          },
-                        }}
-                        className={css.textField}
-                        type="number"
-                        name="vazmeretId"
-                        id="outlined-basic"
-                        label="Vázméret ID"
-                        variant="outlined"
-                        onChange={this.onTextChanged}/>
-                <TextField InputLabelProps={{
-                          classes: {
-                            root: css.textFieldLabel,
-                            focused: css.textFieldFocused
-                          }
-                        }}
-                        InputProps={{
-                          classes: {
-                            root: css.textFieldOutlinedInput,
-                            focused: css.textFieldFocused,
-                            notchedOutline: css.textFieldNotchedOutline,
-                            input: css.textFieldFocused
-                          },
-                        }}
-                        className={css.textField}
-                        type="number"
-                        name="felniAtmeroId"
-                        id="outlined-basic"
-                        label="Felni átmérő ID"
-                        variant="outlined"
-                        onChange={this.onTextChanged}/>
-                <TextField InputLabelProps={{
-                          classes: {
-                            root: css.textFieldLabel,
-                            focused: css.textFieldFocused
-                          }
-                        }}
-                        InputProps={{
-                          classes: {
-                            root: css.textFieldOutlinedInput,
-                            focused: css.textFieldFocused,
-                            notchedOutline: css.textFieldNotchedOutline,
-                            input: css.textFieldFocused
-                          },
-                        }}
-                        className={css.textField}
-                        type="number"
-                        name="valtoTipus"
-                        id="outlined-basic"
-                        label="Váltó típus"
-                        variant="outlined"
-                        onChange={this.onTextChanged}/>
-                <TextField InputLabelProps={{
-                          classes: {
-                            root: css.textFieldLabel,
-                            focused: css.textFieldFocused
-                          }
-                        }}
-                        InputProps={{
-                          classes: {
-                            root: css.textFieldOutlinedInput,
-                            focused: css.textFieldFocused,
-                            notchedOutline: css.textFieldNotchedOutline,
-                            input: css.textFieldFocused
-                          },
-                        }}
-                        className={css.textField}
-                        type="number"
-                        name="tipusId"
-                        id="outlined-basic"
-                        label="Típus ID"
-                        variant="outlined"
-                        onChange={this.onTextChanged}/>
-                <TextField InputLabelProps={{
-                          classes: {
-                            root: css.textFieldLabel,
-                            focused: css.textFieldFocused
-                          }
-                        }}
-                        InputProps={{
-                          classes: {
-                            root: css.textFieldOutlinedInput,
-                            focused: css.textFieldFocused,
-                            notchedOutline: css.textFieldNotchedOutline,
-                            input: css.textFieldFocused
-                          },
-                        }}
-                        className={css.textField}
-                        type="number"
-                        name="ar"
-                        id="outlined-basic"
-                        label="Ár"
-                        variant="outlined"
-                        onChange={this.onTextChanged}/>
-                <TextField InputLabelProps={{
-                          classes: {
-                            root: css.textFieldLabel,
-                            focused: css.textFieldFocused
-                          }
-                        }}
-                        InputProps={{
-                          classes: {
-                            root: css.textFieldOutlinedInput,
-                            focused: css.textFieldFocused,
-                            notchedOutline: css.textFieldNotchedOutline,
-                            input: css.textFieldFocused
-                          },
-                        }}
-                        className={css.textField}
-                        name="url"
-                        id="outlined-basic"
-                        label="Kép URL"
-                        variant="outlined"
-                        onChange={this.onTextChanged}/>
-                {loginButton}
-            <FooterComponent />
-            </div>
+          <React.Fragment>
+          <Route render={ props => <HeaderComponent {...props}/> }/>
+          <Form
+              ref={this.form}
+              submit={() => this.submit()}
+              fields={ this.fields }
+              render={() => 
+              (
+                  <React.Fragment>
+                      <div className="alert alert-info" role="alert">
+                          Enter the information below and we'll get back to you as soon as we can.
+                      </div>
+                          <Field {...this.fields.cikkszam} />
+                          <Field {...this.fields.marka} />
+                          <Field {...this.fields.vazmeret} />
+                          <Field {...this.fields.felniAtmero} />
+                          <Field {...this.fields.valtoTipus} />
+                          <Field {...this.fields.tipus} />
+                          <Field {...this.fields.ar} />
+                          <Field {...this.fields.url} />
+                  </React.Fragment>
+              )}
+          />
+      </React.Fragment>
 
         return Body();
     }

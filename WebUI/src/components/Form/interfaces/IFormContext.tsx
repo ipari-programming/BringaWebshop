@@ -6,7 +6,7 @@ import { IValues } from "./IValues";
 export interface IFormContext extends IFormState
 {
   /* Function that allows values in the values state to be set */
-  setValues: (values: IValues) => void;
+  setValues: (values: IValues, filed?: string) => Promise<void>;
 
   /* Function that validates a field */
   validate: (fieldName: string) => void;

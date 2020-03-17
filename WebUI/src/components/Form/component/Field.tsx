@@ -26,7 +26,7 @@ function storeDate(date: string, key: string): void
 function retreiveDate(key: string): string
 {
   return _dates[key];
-} 
+}
 
 export const Field: React.SFC<IFieldProps> = ({
   id,
@@ -82,7 +82,7 @@ export const Field: React.SFC<IFieldProps> = ({
               variant="filled"
               fullWidth={true}
               value={value}
-              onChange={ (e:React.ChangeEvent<HTMLInputElement>) => context!.setValues({ [id]: e.currentTarget.value }) }
+              onChange={ (e:React.ChangeEvent<HTMLInputElement>) => context!.setValues({ [id]: e.currentTarget.value }, id)}
               onBlur={() => context!.validate(id)}
               style={getEditorStyle(context!.errors)}
             />
@@ -98,7 +98,7 @@ export const Field: React.SFC<IFieldProps> = ({
               rows={5}
               rowsMax={10}
               value={value}
-              onChange={ (e:React.ChangeEvent<HTMLInputElement>) => context!.setValues({ [id]: e.currentTarget.value }) }
+              onChange={ (e:React.ChangeEvent<HTMLInputElement>) => context!.setValues({ [id]: e.currentTarget.value }, id) }
               onBlur={() => context!.validate(id)}
               style={getEditorStyle(context!.errors)}
             />
@@ -109,9 +109,17 @@ export const Field: React.SFC<IFieldProps> = ({
               id={id}
               name={id}
               selectedValue={value}
-              data={selectData ? selectData! : []}
-              onChange={(e: {Id: number | undefined, Name: string | undefined}) => context!.setValues({ [id]: e.Name! }) }
-              onBlur={() => context!.validate(id)}
+              data={selectData ? selectData : []}
+              onChange={(e: {Id: number | undefined, Name: string | undefined}) =>
+              {
+                context!.setValues({ [id]: e.Id!.toString() }, id);
+                context!.validate(id);
+              }}
+              onBlur={(e: {Id: number | undefined, Name: string | undefined}) =>
+              {
+                context!.setValues({ [id]: e.Id!.toString() }, id);
+                context!.validate(id)
+              }}
               displayMember={x => x.Name!}
               valueMember={x => x.Id!.toString()}
               style={getEditorStyle(context!.errors)}
@@ -126,7 +134,7 @@ export const Field: React.SFC<IFieldProps> = ({
               name={id}
               value={value}
               onBlur={() => context!.validate(id)}
-              onChange={(e: React.ChangeEvent<{}>) => context!.setValues({ [id]: (e.currentTarget as HTMLInputElement).value })} >
+              onChange={(e: React.ChangeEvent<{}>) => context!.setValues({ [id]: (e.currentTarget as HTMLInputElement).value }, id)} >
               {options && options.map((option, i) => (
                   <FormControlLabel 
                     key={`${option}-${i}`}
@@ -142,7 +150,7 @@ export const Field: React.SFC<IFieldProps> = ({
               id={id}
               name={id}
               checked={value}
-              onChange={(e:React.ChangeEvent<HTMLInputElement>) => context!.setValues({ [id]: e.currentTarget.checked })}
+              onChange={(e:React.ChangeEvent<HTMLInputElement>) => context!.setValues({ [id]: e.currentTarget.checked }, id)}
               onBlur={() => context!.validate(id)}
               value={value}
               color="primary"
@@ -156,14 +164,15 @@ export const Field: React.SFC<IFieldProps> = ({
               todayButton={"Today"}
               value={retreiveDate(id) ? retreiveDate(id) : formatDate(new Date())}
               selected={retreiveDate(id) ? new Date(retreiveDate(id)) : (new Date())}
-              onChange={(eDate: Date, e: React.SyntheticEvent<any, Event>) => {
-                context!.setValues({ [id]: formatDate(eDate) });
+              onChange={(eDate: Date, e: React.SyntheticEvent<any, Event>) =>
+              {
+                context!.setValues({ [id]: formatDate(eDate) }, id);
                 storeDate(formatDate(eDate), id);
               }}
               onBlur={() =>
               {
                 context!.validate(id);
-                context!.setValues({ [id]: retreiveDate(id) });
+                context!.setValues({ [id]: retreiveDate(id) }, id);
               }}
               minDate={new Date(0, 0, 0, 0, 0, 0, 0)}
               disabledKeyboardNavigation />
@@ -180,7 +189,7 @@ export const Field: React.SFC<IFieldProps> = ({
                 type="file"
                 onChange={ (e:React.ChangeEvent<HTMLInputElement>) =>
                 {
-                  context!.setValues({ [id]: e.currentTarget.value });
+                  context!.setValues({ [id]: e.currentTarget.value }, id);
                 }}
                 onBlur={() => context!.validate(id)}
               />

@@ -31,7 +31,7 @@ export interface SelectProps<TItem extends {Id: number | undefined, Name: string
     style?: React.CSSProperties;
     selectedValue?: any;
     onChange?: (item:TItem) => void;
-    onBlur? : () => void;
+    onBlur? : (item:TItem) => void;
     label?: string;
     name?: string;
     className?: string;

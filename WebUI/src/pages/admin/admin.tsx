@@ -59,6 +59,11 @@ class Admin extends Connected<typeof React.Component, IProps & WithStyles<typeof
         this.props.history.push(Routes.AddProduct);
     }
 
+    createBrandClickHandler = (): void =>
+    {
+        this.props.history.push(Routes.AddBrand);
+    }
+
     render()
     {
         const css = this.props.classes;
@@ -68,6 +73,7 @@ class Admin extends Connected<typeof React.Component, IProps & WithStyles<typeof
             <h1 className={css.hText}>Admin</h1>
             <Route render={ props => <HeaderComponent {...props}/> }/>
             <h3 className={css.action} onClick={this.createClickHandler}>Product Create</h3>
+            <h3 className={css.action} onClick={this.createBrandClickHandler}>Brand Create</h3>
             <FooterComponent />
             </div>
         

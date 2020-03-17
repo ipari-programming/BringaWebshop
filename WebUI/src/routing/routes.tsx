@@ -12,6 +12,8 @@ import AddProductPage from "./../pages/admin/product/add/addProducts";
 
 import ExampleFormPage from "./../pages/formExample";
 import CartPage from "./../pages/cart/cart";
+import AdminPage from "./../pages/admin/admin";
+import AddBrandPage from "./../pages/admin/brand/add/addBrands";
 
 const defaultProtectedRouteProps: ProtectedRouteProps =
 {
@@ -25,7 +27,9 @@ export const AppRoutes = () =>
 
         <ProtectedRoute {...defaultProtectedRouteProps} exact path={ Urls.products } component={ ProductsPage } />
         <ProtectedRoute {...defaultProtectedRouteProps} exact path={ Urls.details } component={ DetailsPage } />
-
         <ProtectedRoute {...defaultProtectedRouteProps} exact path={ Urls.cart } component={ CartPage } />
+
+        <AdmindRoute {...defaultProtectedRouteProps} exact path={Urls.admin} component={ AdminPage } />
         <AdmindRoute {...defaultProtectedRouteProps} exact path={ Urls.addProduct } component={ AddProductPage } />
+        <AdmindRoute {...defaultProtectedRouteProps} exact path={ Urls.addBrand } component={ AddBrandPage } />
     </React.Fragment>

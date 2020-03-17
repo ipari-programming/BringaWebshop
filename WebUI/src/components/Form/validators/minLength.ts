@@ -9,5 +9,5 @@ import { IValues } from "../interfaces/IValues";
  */
 export const minLength = (values: IValues, fieldName: string, length: number): string =>
     values[fieldName] && values[fieldName].length < length
-      ? `This can not go below ${length} value`
+      ? `This can not exceed ${length} value.`
       : "";

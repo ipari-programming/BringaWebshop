@@ -88,11 +88,10 @@ export class Form extends React.Component<IFormProps, IFormState>
       {
         const validators: IValidation[] = this.props.fields[fieldName].validation!;
 
-        validators.map( validator => 
-          {newError = validator.rule(this.state.values, fieldName, validator.args);
-            console.log(newError);}
-        );
-        
+        validators.map( validator =>
+        {
+          newError = validator.rule(this.state.values, fieldName, validator.args);
+        });
       }
 
       this.state.errors[fieldName] = newError;
@@ -130,7 +129,7 @@ export class Form extends React.Component<IFormProps, IFormState>
      * Stores new field values in state
      * @param {IValues} values - The new field values
     */
-    private setValues = (values: IValues) =>
+    private setValues = async (values: IValues, filed?: string): Promise<void> =>
     {
       this.setState
       ({
@@ -139,8 +138,15 @@ export class Form extends React.Component<IFormProps, IFormState>
           ...this.state.values,
           ...values
         }
+      },
+      () =>
+      {
+        if(filed)
+        {
+          this.validate(filed!);
+        }
       });
-    };
+    }
 
     public render()
     {

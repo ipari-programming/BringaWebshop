@@ -7,7 +7,7 @@
 //----------------------
 // ReSharper disable InconsistentNaming
 
-export class BrandService {
+export class WheelDiameterService {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
@@ -19,14 +19,14 @@ export class BrandService {
 
     /**
      * create
-     * @param brandEntity brandEntity
+     * @param wheelDiameterEntity wheelDiameterEntity
      * @return OK
      */
-    brandPost(brandEntity: BrandEntity): Promise<BrandEntity> {
-        let url_ = this.baseUrl + "/api/brand";
+    wheelDiameterPost(wheelDiameterEntity: WheelDiameterEntity): Promise<WheelDiameterEntity> {
+        let url_ = this.baseUrl + "/api/wheelDiameter";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(brandEntity);
+        const content_ = JSON.stringify(wheelDiameterEntity);
 
         let options_ = <RequestInit>{
             body: content_,
@@ -38,17 +38,17 @@ export class BrandService {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processBrandPost(_response);
+            return this.processWheelDiameterPost(_response);
         });
     }
 
-    protected processBrandPost(response: Response): Promise<BrandEntity> {
+    protected processWheelDiameterPost(response: Response): Promise<WheelDiameterEntity> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : <BrandEntity>JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = _responseText === "" ? null : <WheelDiameterEntity>JSON.parse(_responseText, this.jsonParseReviver);
             return result200;
             });
         } else if (status === 201) {
@@ -72,19 +72,19 @@ export class BrandService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<BrandEntity>(<any>null);
+        return Promise.resolve<WheelDiameterEntity>(<any>null);
     }
 
     /**
      * update
-     * @param brandEntity brandEntity
+     * @param wheelDiameterEntity wheelDiameterEntity
      * @return OK
      */
-    brandPut(brandEntity: BrandEntity): Promise<BrandEntity> {
-        let url_ = this.baseUrl + "/api/brand";
+    wheelDiameterPut(wheelDiameterEntity: WheelDiameterEntity): Promise<WheelDiameterEntity> {
+        let url_ = this.baseUrl + "/api/wheelDiameter";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(brandEntity);
+        const content_ = JSON.stringify(wheelDiameterEntity);
 
         let options_ = <RequestInit>{
             body: content_,
@@ -96,17 +96,17 @@ export class BrandService {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processBrandPut(_response);
+            return this.processWheelDiameterPut(_response);
         });
     }
 
-    protected processBrandPut(response: Response): Promise<BrandEntity> {
+    protected processWheelDiameterPut(response: Response): Promise<WheelDiameterEntity> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : <BrandEntity>JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = _responseText === "" ? null : <WheelDiameterEntity>JSON.parse(_responseText, this.jsonParseReviver);
             return result200;
             });
         } else if (status === 201) {
@@ -130,15 +130,15 @@ export class BrandService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<BrandEntity>(<any>null);
+        return Promise.resolve<WheelDiameterEntity>(<any>null);
     }
 
     /**
      * all
      * @return OK
      */
-    all(): Promise<BrandEntity[]> {
-        let url_ = this.baseUrl + "/api/brand/all";
+    all(): Promise<WheelDiameterEntity[]> {
+        let url_ = this.baseUrl + "/api/wheelDiameter/all";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <RequestInit>{
@@ -153,13 +153,13 @@ export class BrandService {
         });
     }
 
-    protected processAll(response: Response): Promise<BrandEntity[]> {
+    protected processAll(response: Response): Promise<WheelDiameterEntity[]> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : <BrandEntity[]>JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = _responseText === "" ? null : <WheelDiameterEntity[]>JSON.parse(_responseText, this.jsonParseReviver);
             return result200;
             });
         } else if (status === 401) {
@@ -179,7 +179,7 @@ export class BrandService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<BrandEntity[]>(<any>null);
+        return Promise.resolve<WheelDiameterEntity[]>(<any>null);
     }
 
     /**
@@ -187,8 +187,8 @@ export class BrandService {
      * @param id id
      * @return OK
      */
-    brandGet(id: number): Promise<BrandEntity> {
-        let url_ = this.baseUrl + "/api/brand/{id}";
+    wheelDiameterGet(id: number): Promise<WheelDiameterEntity> {
+        let url_ = this.baseUrl + "/api/wheelDiameter/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
@@ -202,17 +202,17 @@ export class BrandService {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processBrandGet(_response);
+            return this.processWheelDiameterGet(_response);
         });
     }
 
-    protected processBrandGet(response: Response): Promise<BrandEntity> {
+    protected processWheelDiameterGet(response: Response): Promise<WheelDiameterEntity> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : <BrandEntity>JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = _responseText === "" ? null : <WheelDiameterEntity>JSON.parse(_responseText, this.jsonParseReviver);
             return result200;
             });
         } else if (status === 401) {
@@ -232,7 +232,7 @@ export class BrandService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<BrandEntity>(<any>null);
+        return Promise.resolve<WheelDiameterEntity>(<any>null);
     }
 
     /**
@@ -240,8 +240,8 @@ export class BrandService {
      * @param id id
      * @return OK
      */
-    brandDelete(id: number): Promise<boolean> {
-        let url_ = this.baseUrl + "/api/brand/{id}";
+    wheelDiameterDelete(id: number): Promise<boolean> {
+        let url_ = this.baseUrl + "/api/wheelDiameter/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
@@ -255,11 +255,11 @@ export class BrandService {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processBrandDelete(_response);
+            return this.processWheelDiameterDelete(_response);
         });
     }
 
-    protected processBrandDelete(response: Response): Promise<boolean> {
+    protected processWheelDiameterDelete(response: Response): Promise<boolean> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -289,7 +289,7 @@ export class BrandService {
     }
 }
 
-export interface BrandEntity {
+export interface WheelDiameterEntity {
     Id: number | undefined;
     Name: string | undefined;
 }

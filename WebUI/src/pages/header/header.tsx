@@ -120,7 +120,7 @@ interface IProps
 
     adminClickHandler = (): void =>
     {
-        this.props.history.push(Urls.addProduct);
+        this.props.history.push(Urls.admin);
     }
 
     render()

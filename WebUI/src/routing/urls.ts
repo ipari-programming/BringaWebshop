@@ -9,7 +9,9 @@ export enum Routes
     Cart = "cart",
 
     //admin
-    AddProduct = "admin/product/add"
+    Admin = "admin",
+    AddProduct = "admin/product/add",
+    AddBrand = "admin/brand/add"
 }
 
 export module Urls
@@ -21,6 +23,9 @@ export module Urls
     export const products = `/${Routes.Products}`;
     export const details = `/${Routes.Details}`;
     export const cart = `/${Routes.Cart}`;
+    
     //admin
+    export const admin = `/${Routes.Admin}`;
     export const addProduct = `/${Routes.AddProduct}`;
+    export const addBrand = `/${Routes.AddBrand}`;
 }

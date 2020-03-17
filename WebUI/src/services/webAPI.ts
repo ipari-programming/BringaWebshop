@@ -1,4 +1,4 @@
-import { SecurityAPI, UserAPI, BicycleAPI, BrandAPI } from "./settings/wrappers";
+import { SecurityAPI, UserAPI, BicycleAPI, BrandAPI, SizeAPI, ShifterAPI, TypeAPI, WheelDiameterAPI } from "./settings/wrappers";
 import { baseURL } from "./settings/base.url";
 import { FetchProxy } from "./settings/fetch.proxy";
 import { StorageKeys } from "./../settings/constats";
@@ -17,6 +17,10 @@ export module WebAPI
     export const User: UserAPI = new UserAPI(baseURL, proxy);
     export const Bicycle : BicycleAPI = new BicycleAPI(baseURL, proxy);
     export const Brand : BrandAPI = new BrandAPI(baseURL, proxy);
+    export const Size : SizeAPI = new SizeAPI(baseURL, proxy);
+    export const Shifter : ShifterAPI = new ShifterAPI(baseURL, proxy);
+    export const Type : TypeAPI = new TypeAPI(baseURL, proxy);
+    export const WheelDiameter : WheelDiameterAPI = new WheelDiameterAPI(baseURL, proxy);
 
     export function attachToConnectionCallback(callback: (res: Response) => void)
     {

@@ -20,6 +20,7 @@ declare global
         remove(o: T): void;
         toEnum(): Enumerable<T>;
         toCss(): string;
+        insert( index: number, item: T ): T[];
      }
 
     interface HTMLCollection
@@ -62,6 +63,13 @@ Array.prototype.toEnum = function ()
 {
     return asEnumerable(this);
 }
+
+Array.prototype.insert = function<T> ( index: number, item: T )
+{
+    const array: T[] = this;
+    array.splice( index, 0, item );
+    return array;
+};
 
 HTMLCollection.prototype.toArray = function (): any[]
 {

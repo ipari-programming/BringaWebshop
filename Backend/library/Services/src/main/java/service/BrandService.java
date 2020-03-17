@@ -23,6 +23,9 @@ public class BrandService implements IBrandService {
         {
             List<BrandEntity> brandEntities = _brandRepository.getAll();
 
+            BrandEntity emptySelect = new BrandEntity(0, "");
+            brandEntities.add(0, emptySelect);
+
             response.setObject(brandEntities);
             response.setIsSuccess(true);
             response.setMessage("No errors.");

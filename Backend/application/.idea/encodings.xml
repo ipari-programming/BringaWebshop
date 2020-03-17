@@ -3,9 +3,14 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../library/Infrastructure" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../library/Infrastructure/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../library/Models" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../library/Models/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../library/Repositories" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../library/Repositories/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../library/Services" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../library/Services/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../library/WebAPI" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../library/WebAPI/src/main/java" charset="UTF-8" />
   </component>
 </project>

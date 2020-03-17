@@ -22,7 +22,8 @@ public class TypeService implements ITypeService {
         try
         {
             List<TypeEntity> typeEntities = _typeRepository.getAll();
-
+            TypeEntity emptySelect = new TypeEntity(0, "");
+            typeEntities.add(0, emptySelect);
             response.setObject(typeEntities);
             response.setIsSuccess(true);
             response.setMessage("No errors.");

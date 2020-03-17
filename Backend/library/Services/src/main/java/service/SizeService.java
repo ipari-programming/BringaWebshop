@@ -23,6 +23,9 @@ public class SizeService implements ISizeService {
         {
             List<SizeEntity> sizeEntities = _sizeRepository.getAll();
 
+            SizeEntity emptySelect = new SizeEntity(0, "");
+            sizeEntities.add(0, emptySelect);
+
             response.setObject(sizeEntities);
             response.setIsSuccess(true);
             response.setMessage("No errors.");

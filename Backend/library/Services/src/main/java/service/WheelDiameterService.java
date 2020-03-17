@@ -22,7 +22,8 @@ public class WheelDiameterService implements IWheelDiameterService {
         try
         {
             List<WheelDiameterEntity> wheelDiameterEntities = _wheelDiameterRepository.getAll();
-
+            WheelDiameterEntity emptySelect = new WheelDiameterEntity(0, "");
+            wheelDiameterEntities.add(0, emptySelect);
             response.setObject(wheelDiameterEntities);
             response.setIsSuccess(true);
             response.setMessage("No errors.");

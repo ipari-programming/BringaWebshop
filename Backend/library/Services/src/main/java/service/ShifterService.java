@@ -23,6 +23,9 @@ public class ShifterService implements IShifterService {
         {
             List<ShifterEntity> shifterEntities = _shifterRepository.getAll();
 
+            ShifterEntity emptySelect = new ShifterEntity(0, "");
+            shifterEntities.add(0, emptySelect);
+
             response.setObject(shifterEntities);
             response.setIsSuccess(true);
             response.setMessage("No errors.");

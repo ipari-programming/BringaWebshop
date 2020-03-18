@@ -15,6 +15,7 @@ import CartPage from "./../pages/cart/cart";
 import AdminPage from "./../pages/admin/admin";
 import AddBrandPage from "./../pages/admin/brand/add/addBrands";
 import AddShifterPage from "./../pages/admin/shifter/add/addShifter";
+import AddFrameSizePage from "../pages/admin/framesize/add/addFrameSize";
 
 const defaultProtectedRouteProps: ProtectedRouteProps =
 {
@@ -34,4 +35,5 @@ export const AppRoutes = () =>
         <AdmindRoute {...defaultProtectedRouteProps} exact path={ Urls.addProduct } component={ AddProductPage } />
         <AdmindRoute {...defaultProtectedRouteProps} exact path={ Urls.addBrand } component={ AddBrandPage } />
         <AdmindRoute {...defaultProtectedRouteProps} exact path={ Urls.addShifter } component={ AddShifterPage } />
+        <AdmindRoute {...defaultProtectedRouteProps} exact path={ Urls.addSize } component={ AddFrameSizePage } />
     </React.Fragment>

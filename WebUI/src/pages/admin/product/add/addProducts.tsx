@@ -123,8 +123,6 @@ class AddProduct extends Connected<typeof React.Component, IProps & WithStyles<t
       const bicycle = await WebAPI.Bicycle.create(bicucli)
                                          .then(x => x)
                                          .catch();
-
-                                         console.log(bicycle);
     }
 
     render()

@@ -91,6 +91,8 @@ class AddShifter extends Connected<typeof React.Component, IProps & WithStyles<t
       const newShifter = await WebAPI.Shifter.shifterPost(shifter)
                                              .then(x => x)
                                              .catch();
+
+      window.location.reload(false);
     }
 
     render()

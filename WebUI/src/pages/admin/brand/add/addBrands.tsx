@@ -81,6 +81,8 @@ class AddBrand extends Connected<typeof React.Component, IProps & WithStyles<typ
       const newBrand = await WebAPI.Brand.brandPost(brand)
                                          .then(x => x)
                                          .catch();
+
+      window.location.reload(false);
     }
 
     render()

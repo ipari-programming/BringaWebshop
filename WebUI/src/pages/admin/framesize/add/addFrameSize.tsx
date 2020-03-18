@@ -79,6 +79,8 @@ class AddFrame extends Connected<typeof React.Component, IProps & WithStyles<typ
       const newSize = await WebAPI.Size.sizePost(size)
                                          .then(x => x)
                                          .catch();
+
+      window.location.reload(false);
     }
 
     render()

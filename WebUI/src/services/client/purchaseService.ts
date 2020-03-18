@@ -7,7 +7,7 @@
 //----------------------
 // ReSharper disable InconsistentNaming
 
-export class ShifterService {
+export class PurchaseService {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
@@ -19,14 +19,14 @@ export class ShifterService {
 
     /**
      * create
-     * @param shifterEntity shifterEntity
+     * @param purchaseEntity purchaseEntity
      * @return OK
      */
-    shifterPost(shifterEntity: ShifterEntity): Promise<ShifterEntity> {
-        let url_ = this.baseUrl + "/api/shifter";
+    purchasePost(purchaseEntity: PurchaseEntity): Promise<PurchaseEntity> {
+        let url_ = this.baseUrl + "/api/purchase";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(shifterEntity);
+        const content_ = JSON.stringify(purchaseEntity);
 
         let options_ = <RequestInit>{
             body: content_,
@@ -38,17 +38,17 @@ export class ShifterService {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processShifterPost(_response);
+            return this.processPurchasePost(_response);
         });
     }
 
-    protected processShifterPost(response: Response): Promise<ShifterEntity> {
+    protected processPurchasePost(response: Response): Promise<PurchaseEntity> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : <ShifterEntity>JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = _responseText === "" ? null : <PurchaseEntity>JSON.parse(_responseText, this.jsonParseReviver);
             return result200;
             });
         } else if (status === 201) {
@@ -72,15 +72,15 @@ export class ShifterService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ShifterEntity>(<any>null);
+        return Promise.resolve<PurchaseEntity>(<any>null);
     }
 
     /**
      * all
      * @return OK
      */
-    all(): Promise<ShifterEntity[]> {
-        let url_ = this.baseUrl + "/api/shifter/all";
+    all(): Promise<PurchaseEntity[]> {
+        let url_ = this.baseUrl + "/api/purchase/all";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <RequestInit>{
@@ -95,13 +95,13 @@ export class ShifterService {
         });
     }
 
-    protected processAll(response: Response): Promise<ShifterEntity[]> {
+    protected processAll(response: Response): Promise<PurchaseEntity[]> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : <ShifterEntity[]>JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = _responseText === "" ? null : <PurchaseEntity[]>JSON.parse(_responseText, this.jsonParseReviver);
             return result200;
             });
         } else if (status === 401) {
@@ -121,7 +121,7 @@ export class ShifterService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ShifterEntity[]>(<any>null);
+        return Promise.resolve<PurchaseEntity[]>(<any>null);
     }
 
     /**
@@ -129,8 +129,8 @@ export class ShifterService {
      * @param id id
      * @return OK
      */
-    shifterGet(id: number): Promise<ShifterEntity> {
-        let url_ = this.baseUrl + "/api/shifter/{id}";
+    purchaseGet(id: number): Promise<PurchaseEntity> {
+        let url_ = this.baseUrl + "/api/purchase/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
@@ -144,17 +144,17 @@ export class ShifterService {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processShifterGet(_response);
+            return this.processPurchaseGet(_response);
         });
     }
 
-    protected processShifterGet(response: Response): Promise<ShifterEntity> {
+    protected processPurchaseGet(response: Response): Promise<PurchaseEntity> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : <ShifterEntity>JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = _responseText === "" ? null : <PurchaseEntity>JSON.parse(_responseText, this.jsonParseReviver);
             return result200;
             });
         } else if (status === 401) {
@@ -174,13 +174,22 @@ export class ShifterService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ShifterEntity>(<any>null);
+        return Promise.resolve<PurchaseEntity>(<any>null);
     }
 }
 
-export interface ShifterEntity {
+export interface PurchaseEntity {
+    CustomerUniqId: string | undefined;
+    Date: Date | undefined;
     Id: number | undefined;
-    Name: string | undefined;
+    ItemId: number | undefined;
+    PaymentMethod: PurchaseEntityPaymentMethod | undefined;
+}
+
+export enum PurchaseEntityPaymentMethod {
+    PAYMENT_CASH = "PAYMENT_CASH",
+    PAYMENT_DEBITCARD = "PAYMENT_DEBITCARD",
+    PAYMENT_TRANSFER = "PAYMENT_TRANSFER",
 }
 
 export class ApiException extends Error {

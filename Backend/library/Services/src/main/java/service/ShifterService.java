@@ -1,6 +1,7 @@
 package service;
 
 import common.ServiceObjectResponse;
+import entity.BrandEntity;
 import entity.ShifterEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,28 @@ public class ShifterService implements IShifterService {
 
     @Autowired
     IShifterRepository _shifterRepository;
+
+    public ServiceObjectResponse<ShifterEntity> create(ShifterEntity shifterEntity)
+    {
+        ServiceObjectResponse<ShifterEntity> response = new ServiceObjectResponse<>();
+
+        try
+        {
+            ShifterEntity data = _shifterRepository.ShifterCreate(shifterEntity);
+
+            response.setObject(data);
+            response.setIsSuccess(true);
+            response.setMessage("No errors.");
+        }
+        catch (Exception ex)
+        {
+            response.setIsSuccess(false);
+            response.setMessage(ex.getMessage());
+        }
+
+        return response;
+    }
+
 
     public ServiceObjectResponse<List<ShifterEntity>> getAll()
     {
@@ -60,4 +83,6 @@ public class ShifterService implements IShifterService {
 
         return response;
     }
+
+
 }

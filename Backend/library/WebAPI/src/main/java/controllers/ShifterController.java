@@ -7,10 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import services.IShifterService;
 
 import java.util.List;
@@ -20,6 +17,22 @@ import java.util.List;
 public class ShifterController {
     @Autowired
     IShifterService _shifterService;
+
+    @ApiOperation(value = "create", nickname = "create")
+    @PostMapping("/api/shifter")
+    @ResponseBody
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENT')")
+    public ShifterEntity CreateShifter(@RequestBody ShifterEntity shifterEntity) throws Exception
+    {
+        ServiceObjectResponse<ShifterEntity> request = _shifterService.create(shifterEntity);
+
+        if(!request.getIsSuccess())
+        {
+            throw new Exception(request.getMessage());
+        }
+        return request.getObject();
+    }
+
 
     @ApiOperation(value = "all", nickname = "all")
     @GetMapping("/api/shifter/all")

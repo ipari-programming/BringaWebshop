@@ -15,6 +15,25 @@ import java.util.List;
 @Service
 public class ShifterRepository implements IShifterRepository {
 
+    public ShifterEntity ShifterCreate(ShifterEntity shifterEntity) throws Exception
+    {
+        Connection connection = DBConnection.getConnection();
+
+        String SQL = "{ CALL ShifterCreate(?, ?) }";
+
+        CallableStatement stmt = connection.prepareCall(SQL);
+        stmt.setInt(1, shifterEntity.Id);
+        stmt.setString(2, shifterEntity.Name);
+
+
+        ResultSet resultSets  = stmt.executeQuery();
+        if (resultSets.next())
+        {
+            shifterEntity.Id = resultSets.getInt(1);
+        }
+        return shifterEntity;
+    }
+
 
     public List<ShifterEntity> getAll() throws Exception
     {
@@ -68,7 +87,6 @@ public class ShifterRepository implements IShifterRepository {
         ShifterEntity shifterEntity = new ShifterEntity();
         shifterEntity.Id = Integer.parseInt(dataSet.getString("id"));
         shifterEntity.Name = dataSet.getString("tipus");
-
         return  shifterEntity;
     }
 

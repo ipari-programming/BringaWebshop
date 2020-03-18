@@ -73,7 +73,7 @@ class AddFrame extends Connected<typeof React.Component, IProps & WithStyles<typ
 
       const size: SizeEntity = {
         Id: data.id,
-        Name: data.marka
+        Name: data.meret
       };
 
       const newSize = await WebAPI.Size.sizePost(size)
@@ -94,7 +94,7 @@ class AddFrame extends Connected<typeof React.Component, IProps & WithStyles<typ
           meret:
           {
             id: FieldTypes.meret,
-            label: "Márka",
+            label: "Méret",
             validation: [ {rule: required} ]
           }
         }

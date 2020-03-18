@@ -4,7 +4,7 @@ import { RouteComponentProps, Route } from "react-router";
 import { AppStore } from "./../../lib/appStore";
 import { Theme, createStyles, withStyles, WithStyles, TextField, Typography, Button } from "@material-ui/core"
 import withRoot from "./../../withRoot";
-import { Routes } from "./../../routing/urls";
+import { Urls } from "./../../routing/urls";
 import HeaderComponent from "../header/header";
 import FooterComponent from "../footer/footer";
 import { CustomColors } from "./../../style/colors";
@@ -56,12 +56,17 @@ class Admin extends Connected<typeof React.Component, IProps & WithStyles<typeof
 
     createClickHandler = (): void =>
     {
-        this.props.history.push(Routes.AddProduct);
+        this.props.history.push(Urls.addProduct);
     }
 
     createBrandClickHandler = (): void =>
     {
-        this.props.history.push(Routes.AddBrand);
+        this.props.history.push(Urls.addBrand);
+    }
+
+    createShifterClickHandler = (): void =>
+    {
+        this.props.history.push(Urls.addShifter);
     }
 
     render()
@@ -74,6 +79,7 @@ class Admin extends Connected<typeof React.Component, IProps & WithStyles<typeof
             <Route render={ props => <HeaderComponent {...props}/> }/>
             <h3 className={css.action} onClick={this.createClickHandler}>Product Create</h3>
             <h3 className={css.action} onClick={this.createBrandClickHandler}>Brand Create</h3>
+            <h3 className={css.action} onClick={this.createShifterClickHandler}>Shifter Create</h3>
             <FooterComponent />
             </div>
         

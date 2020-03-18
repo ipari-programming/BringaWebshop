@@ -109,6 +109,7 @@ class AddProduct extends Connected<typeof React.Component, IProps & WithStyles<t
 
       const bicucli: BicycleEntity =
         {
+          Id: data.id,
           Cikkszam : data.cikkszam,
           MarkaID: data.marka,
           VazmeretID: data.vazmeret,

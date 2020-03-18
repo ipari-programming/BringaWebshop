@@ -7,12 +7,16 @@ import withRoot from "./../../../../withRoot";
 import { CustomColors } from "./../../../../style/colors";
 import HeaderComponent from "./../../../../pages/header/header";
 import FooterComponent from "./../../../../pages/footer/footer";
+import { BicycleEntity } from "./../../../../services/client/bicycleService";
 import { WebAPI } from "./../../../../services/webAPI";
 import { Form } from "./../../../../components/Form/Form";
 import { Field } from "./../../../../components/Form/component/Field";
 import { IFields } from "./../../../../components/Form/interfaces/IFields";
 import { required } from "./../../../../components/Form/validators/required";
 import { BrandEntity } from "./../../../../services/client/brandService";
+import { ShifterEntity } from "./../../../../services/client/shifterService";
+import { minValue } from "./../../../../components/Form/validators/minValue";
+import { Urls } from "./../../../../routing/urls";
 
 const styles = (theme: Theme) =>
   createStyles
@@ -31,7 +35,7 @@ const styles = (theme: Theme) =>
 
 interface IState
 {
-    brands: BrandEntity[];
+  shifters: ShifterEntity[];
 }
 
 interface IProps
@@ -39,10 +43,14 @@ interface IProps
 
 enum FieldTypes
 { 
-    marka = "marka"
+  /*
+  KEY = VALUE
+  vigyazzunk arra, hogy a ket nev teljessen megegyezzen
+  */
+  valtoUj = "valtoUj"
 }
 
-class AddBrand extends Connected<typeof React.Component, IProps & WithStyles<typeof styles> & RouteComponentProps<{}>, IState, AppStore>(React.Component)
+class AddShifter extends Connected<typeof React.Component, IProps & WithStyles<typeof styles> & RouteComponentProps<{}>, IState, AppStore>(React.Component)
 { 
     constructor(props: IProps & WithStyles<typeof styles> & RouteComponentProps<{}>)
     {
@@ -50,18 +58,18 @@ class AddBrand extends Connected<typeof React.Component, IProps & WithStyles<typ
 
       this.state =
       {
-          brands: []
+        shifters: []
       }
     }
 
     componentWillMount = async (): Promise<void> =>
     {
-      let brands: {Id: number | undefined, Name: string | undefined }[] = await WebAPI.Brand.all().then(x => x);
+      let shifters: ShifterEntity[] = await WebAPI.Shifter.all().then(x => x);
 
       this.setState
       ({
         ...this.state,
-        brands
+        shifters
       });
     }
 
@@ -71,67 +79,68 @@ class AddBrand extends Connected<typeof React.Component, IProps & WithStyles<typ
     {
       console.log("SUBMITED");
       const data = {...this.form.current!.state!.values};
-      console.log(data);
 
-      const brand: BrandEntity = {
+      const shifter: ShifterEntity = 
+      {
         Id: data.id,
-        Name: data.marka
+        Name: data.valtoUj
       };
 
-      const newBrand = await WebAPI.Brand.brandPost(brand)
-                                         .then(x => x)
-                                         .catch();
+      console.log(shifter);
+
+      const newShifter = await WebAPI.Shifter.shifterPost(shifter)
+                                             .then(x => x)
+                                             .catch();
     }
 
     render()
     {
         const css = this.props.classes;
 
-        const brands:JSX.Element[] = this.state.brands.map
+        const shifters:JSX.Element[] = this.state.shifters.map
         (
             x => x.Name != "" ?  <li>{x.Name}</li> : <span/>
         );
+		
         const fields: IFields =
         {
-          marka:
+          valtoUj:
           {
-            id: FieldTypes.marka,
-            label: "Márka",
-            validation: [ {rule: required} ]
+            id: FieldTypes.valtoUj,
+            label: "Váltó típus",
+            validation: [{rule: required}]
           }
         }
 
         const Body = () =>
         <React.Fragment>
-          <div>
             <Route render={ props => <HeaderComponent {...props}/> }/>
             <div>
               <p>Jelenlegi márkák:</p>
               <ul>
-                  {brands}
+                  {shifters}
               </ul>
             </div>
-              <Form
-                  ref={this.form}
-                  submit={() => this.submit()}
-                  fields={ fields }
-                  render={() => 
-                  (
-                      <React.Fragment>
-                          <div className="alert alert-info" role="alert">
-                              Új márka felvitele:
-                          </div>
-                          <Field {...fields.marka} />
-                      </React.Fragment>
-                  )}
-              />
-              <FooterComponent />
-          </div>
+            <Form
+                ref={this.form}
+                submit={() => this.submit()}
+                fields={ fields }
+                render={() => 
+                (
+                    <React.Fragment>
+                        <div className="alert alert-info" role="alert">
+                            Új váltó típus felvitele:
+                        </div>
+                        <Field {...fields.valtoUj} />
+                    </React.Fragment>
+                )}
+            />
+            <FooterComponent />
         </React.Fragment>
 
         return Body();
     }
 }
 
-const AddBrandPage = withRoot(withStyles(styles)(AddBrand));
-export default AddBrandPage;
+const AddShifterPage = withRoot(withStyles(styles)(AddShifter));
+export default AddShifterPage;

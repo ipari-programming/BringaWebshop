@@ -5,7 +5,7 @@ import { BrandService } from "./../client/brandService";
 import { SizeService } from "./../client/sizeService";
 import { ShifterService } from "./../client/shifterService";
 import { TypeService } from "./../client/typeService";
-import { WheelDiameterService } from "./../client/wheelDiameterService";
+import { wheelDiameterService } from "./../client/wheelDiameterService";
 
 export class SecurityAPI extends SecurityService
 {
@@ -70,7 +70,7 @@ export class TypeAPI extends TypeService
     }
 }
 
-export class WheelDiameterAPI extends WheelDiameterService
+export class WheelDiameterAPI extends wheelDiameterService
 {
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> })
     {

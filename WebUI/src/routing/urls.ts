@@ -13,7 +13,8 @@ export enum Routes
     AddProduct = "admin/product/add",
     AddBrand = "admin/brand/add",
     AddShifter = "admin/shifter/add",
-    AddSize = "admin/framesize/add"
+    AddSize = "admin/framesize/add",
+    AddType = "admin/type/add"
 }
 
 export module Urls
@@ -32,4 +33,5 @@ export module Urls
     export const addBrand = `/${Routes.AddBrand}`;
     export const addShifter = `/${Routes.AddShifter}`;
     export const addSize = `/${Routes.AddSize}`;
+    export const addType = `/${Routes.AddType}`;
 }

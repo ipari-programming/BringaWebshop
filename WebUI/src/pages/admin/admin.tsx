@@ -74,6 +74,11 @@ class Admin extends Connected<typeof React.Component, IProps & WithStyles<typeof
         this.props.history.push(Urls.addSize);
     }
 
+    createTypeClickHandler = (): void =>
+    {
+        this.props.history.push(Urls.addType);
+    }
+
     render()
     {
         const css = this.props.classes;
@@ -86,6 +91,7 @@ class Admin extends Connected<typeof React.Component, IProps & WithStyles<typeof
             <h3 className={css.action} onClick={this.createBrandClickHandler}>Brand Create</h3>
             <h3 className={css.action} onClick={this.createShifterClickHandler}>Shifter Create</h3>
             <h3 className={css.action} onClick={this.createSizeClickHandler}>Size Create</h3>
+            <h3 className={css.action} onClick={this.createTypeClickHandler}>Type Create</h3>
             <FooterComponent />
             </div>
         

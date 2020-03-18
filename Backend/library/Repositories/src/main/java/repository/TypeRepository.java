@@ -19,7 +19,7 @@ public class TypeRepository implements ITypeRepository {
     {
         Connection connection = DBConnection.getConnection();
 
-        String SQL = "{ CALL TypeCreate(?, ? }";
+        String SQL = "{ CALL TypeCreate(?, ?) }";
 
         CallableStatement stmt = connection.prepareCall(SQL);
         stmt.setInt(1, typeEntity.Id);

@@ -17,6 +17,7 @@ import AddBrandPage from "./../pages/admin/brand/add/addBrands";
 import AddShifterPage from "./../pages/admin/shifter/add/addShifter";
 import AddFrameSizePage from "./../pages/admin/framesize/add/addFrameSize";
 import AddTypePage from "./../pages/admin/type/add/addType";
+import AddWheelDiameterPage from "./../pages/admin/wheeldiameter/add/addWheelDiameter";
 
 const defaultProtectedRouteProps: ProtectedRouteProps =
 {
@@ -38,4 +39,5 @@ export const AppRoutes = () =>
         <AdmindRoute {...defaultProtectedRouteProps} exact path={ Urls.addShifter } component={ AddShifterPage } />
         <AdmindRoute {...defaultProtectedRouteProps} exact path={ Urls.addSize } component={ AddFrameSizePage } />
         <AdmindRoute {...defaultProtectedRouteProps} exact path={ Urls.addType } component={ AddTypePage } />
+        <AdmindRoute {...defaultProtectedRouteProps} exact path={ Urls.AddWheelDiameter } component={ AddWheelDiameterPage } />
     </React.Fragment>

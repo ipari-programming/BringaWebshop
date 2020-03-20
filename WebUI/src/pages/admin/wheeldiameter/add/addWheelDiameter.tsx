@@ -12,7 +12,7 @@ import { Form } from "./../../../../components/Form/Form";
 import { Field } from "./../../../../components/Form/component/Field";
 import { IFields } from "./../../../../components/Form/interfaces/IFields";
 import { required } from "./../../../../components/Form/validators/required";
-import { SizeEntity } from "./../../../../services/client/sizeService";
+import { WheelDiameterEntity } from "../../../../services/client/wheelDiameterService";
 
 const styles = (theme: Theme) =>
   createStyles
@@ -31,7 +31,7 @@ const styles = (theme: Theme) =>
 
 interface IState
 {
-    sizes: SizeEntity[];
+    diameters: WheelDiameterEntity[];
 }
 
 interface IProps
@@ -39,10 +39,10 @@ interface IProps
 
 enum FieldTypes
 { 
-    meret = "meret"
+    diameter = "diameter"
 }
 
-class AddFrame extends Connected<typeof React.Component, IProps & WithStyles<typeof styles> & RouteComponentProps<{}>, IState, AppStore>(React.Component)
+class AddWheelDiameter extends Connected<typeof React.Component, IProps & WithStyles<typeof styles> & RouteComponentProps<{}>, IState, AppStore>(React.Component)
 { 
     constructor(props: IProps & WithStyles<typeof styles> & RouteComponentProps<{}>)
     {
@@ -50,18 +50,18 @@ class AddFrame extends Connected<typeof React.Component, IProps & WithStyles<typ
 
       this.state =
       {
-          sizes: []
+          diameters: []
       }
     }
 
     componentWillMount = async (): Promise<void> =>
     {
-      let sizes: {Id: number | undefined, Name: string | undefined }[] = await WebAPI.Size.all().then(x => x);
+      let diameters: {Id: number | undefined, Name: string | undefined }[] = await WebAPI.WheelDiameter.all().then(x => x);
 
       this.setState
       ({
         ...this.state,
-        sizes
+        diameters
       });
     }
 
@@ -71,12 +71,12 @@ class AddFrame extends Connected<typeof React.Component, IProps & WithStyles<typ
     {
       const data = {...this.form.current!.state!.values};
 
-      const size: SizeEntity = {
+      const diameter: WheelDiameterEntity = {
         Id: data.id,
-        Name: data.meret
+        Name: data.diameter
       };
 
-      const newSize = await WebAPI.Size.sizePost(size)
+      const newDiameter = await WebAPI.WheelDiameter.wheelDiameterPost(diameter)
                                          .then(x => x)
                                          .catch();
 
@@ -87,16 +87,16 @@ class AddFrame extends Connected<typeof React.Component, IProps & WithStyles<typ
     {
         const css = this.props.classes;
 
-        const sizes:JSX.Element[] = this.state.sizes.map
+        const sizes:JSX.Element[] = this.state.diameters.map
         (
             x => x.Name != "" ?  <li>{x.Name}</li> : <span/>
         );
         const fields: IFields =
         {
-          meret:
+          diameter:
           {
-            id: FieldTypes.meret,
-            label: "Méret",
+            id: FieldTypes.diameter,
+            label: "Kerék átmérő",
             validation: [ {rule: required} ]
           }
         }
@@ -106,7 +106,7 @@ class AddFrame extends Connected<typeof React.Component, IProps & WithStyles<typ
           <div>
             <Route render={ props => <HeaderComponent {...props}/> }/>
             <div>
-              <p>Jelenlegi méretek:</p>
+              <p>Jelenlegi kerék átmérők:</p>
               <ul>
                   {sizes}
               </ul>
@@ -119,7 +119,7 @@ class AddFrame extends Connected<typeof React.Component, IProps & WithStyles<typ
                   (
                       <React.Fragment>
                           <div className="alert alert-info" role="alert">
-                              Új méret felvitele:
+                              Új kerék átmérő felvitele:
                           </div>
                           <Field {...fields.meret} />
                       </React.Fragment>
@@ -133,5 +133,5 @@ class AddFrame extends Connected<typeof React.Component, IProps & WithStyles<typ
     }
 }
 
-const AddFrameSizePage = withRoot(withStyles(styles)(AddFrame));
-export default AddFrameSizePage;
+const AddWheelDiameterPage = withRoot(withStyles(styles)(AddWheelDiameter));
+export default AddWheelDiameterPage;

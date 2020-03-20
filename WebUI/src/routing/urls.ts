@@ -14,7 +14,8 @@ export enum Routes
     AddBrand = "admin/brand/add",
     AddShifter = "admin/shifter/add",
     AddSize = "admin/framesize/add",
-    AddType = "admin/type/add"
+    AddType = "admin/type/add",
+    AddWheelDiameter = "admin/wheeldiameter/add"
 }
 
 export module Urls
@@ -34,4 +35,5 @@ export module Urls
     export const addShifter = `/${Routes.AddShifter}`;
     export const addSize = `/${Routes.AddSize}`;
     export const addType = `/${Routes.AddType}`;
+    export const AddWheelDiameter = `/${Routes.AddWheelDiameter}`;
 }

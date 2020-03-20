@@ -87,7 +87,7 @@ class AddWheelDiameter extends Connected<typeof React.Component, IProps & WithSt
     {
         const css = this.props.classes;
 
-        const sizes:JSX.Element[] = this.state.diameters.map
+        const diameters:JSX.Element[] = this.state.diameters.map
         (
             x => x.Name != "" ?  <li>{x.Name}</li> : <span/>
         );
@@ -108,7 +108,7 @@ class AddWheelDiameter extends Connected<typeof React.Component, IProps & WithSt
             <div>
               <p>Jelenlegi kerék átmérők:</p>
               <ul>
-                  {sizes}
+                  {diameters}
               </ul>
             </div>
               <Form
@@ -121,7 +121,7 @@ class AddWheelDiameter extends Connected<typeof React.Component, IProps & WithSt
                           <div className="alert alert-info" role="alert">
                               Új kerék átmérő felvitele:
                           </div>
-                          <Field {...fields.meret} />
+                          <Field {...fields.diameter} />
                       </React.Fragment>
                   )}
               />

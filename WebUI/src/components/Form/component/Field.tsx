@@ -15,20 +15,6 @@ import IconButton from "@material-ui/core/IconButton";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { CustomColors } from "../../../style/colors";
-
-const styles = (theme: Theme) =>
-  createStyles
-  ({
-    textColor:
-    {
-      color: "#33ff00 !important"
-    },
-    backgroundColor:
-    {
-      backgroundColor: CustomColors.background
-    }
-  })
 
 let _dates:IValues = {};
 
@@ -87,7 +73,8 @@ export const Field: React.SFC<IFieldProps> = ({
     <FormContext.Consumer>
       {(context: IFormContext  | undefined) => (
         <div className="form-group">
-          {label && <InputLabel htmlFor={id}>{label}</InputLabel>}
+          {/*Class name-et adott Ricsi az átszínezéshez*/}
+          {label && <InputLabel className="text-white" htmlFor={id}>{label}</InputLabel>}
 
           {editor!.toLowerCase() === "textbox" && (
             <TextField
@@ -140,7 +127,8 @@ export const Field: React.SFC<IFieldProps> = ({
               }}
               displayMember={x => x.Name!}
               valueMember={x => x.Id!.toString()}
-              style={getEditorStyle(context!.errors)}
+              /*Text white hozzáadta Ricsi*/
+              style={getEditorStyle(context!.errors) && { color: 'white' }}
             />
           )}
 

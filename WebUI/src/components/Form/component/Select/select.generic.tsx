@@ -52,10 +52,10 @@ export class GenericSelect<TItem extends {Id: number | undefined, Name: string |
     render()
     {
         const items = this.props.data.map((item) =>
-                <option key={ this.props.valueMember(item) } value={ this.props.valueMember(item) }>
+                <option className="text-dark" key={ this.props.valueMember(item) } value={ this.props.valueMember(item) }>
                     { this.props.displayMember(item) }
                 </option>)
-
+        /*Classname Text dark hozzáadta Ricsi*/
         const Body = () =>
             <FormControl required style={formControl}>
                 <Select

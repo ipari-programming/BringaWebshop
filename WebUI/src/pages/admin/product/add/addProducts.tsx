@@ -2,12 +2,12 @@ import * as React from "react";
 import { Connected } from "./../../../../lib/store/connected.mixin";
 import { RouteComponentProps, Route } from "react-router";
 import { AppStore } from "./../../../../lib/appStore";
-import { Theme, createStyles, withStyles, WithStyles } from "@material-ui/core"
+import { Theme, createStyles, withStyles, WithStyles, ListItem, ListItemText, List } from "@material-ui/core"
 import withRoot from "./../../../../withRoot";
 import { CustomColors } from "./../../../../style/colors";
 import HeaderComponent from "./../../../../pages/header/header";
 import FooterComponent from "./../../../../pages/footer/footer";
-import { BicycleEntity } from "./../../../../services/client/bicycleService";
+import { BicycleEntity, BicycleResponse } from "./../../../../services/client/bicycleService";
 import { WebAPI } from "./../../../../services/webAPI";
 import { Form } from "./../../../../components/Form/Form";
 import { Field } from "./../../../../components/Form/component/Field";
@@ -58,11 +58,12 @@ const styles = (theme: Theme) =>
 
 interface IState
 {
-  brands: [];
-  shifters: { Id: number | undefined, Name: string | undefined }[];
-  sizes: { Id: number | undefined, Name: string | undefined }[];
-  types: { Id: number | undefined, Name: string | undefined }[];
-  wheelDiameters: { Id: number | undefined, Name: string | undefined }[];
+  brands: BrandEntity[];
+  shifters: ShifterEntity[];
+  sizes: SizeEntity[];
+  types: TypeEntity[];
+  wheelDiameters: WheelDiameterEntity[];
+  bicycles: BicycleResponse[];
 }
 
 interface IProps
@@ -92,17 +93,19 @@ class AddProduct extends Connected<typeof React.Component, IProps & WithStyles<t
         shifters: [],
         sizes: [],
         types: [],
-        wheelDiameters: []
+        wheelDiameters: [],
+        bicycles: []
       }
     }
 
     componentWillMount = async (): Promise<void> =>
     {
-      let brands: { Id: number | undefined, Name: string | undefined }[] = await WebAPI.Brand.all().then(x => x);
-      let shifters: { Id: number | undefined, Name: string | undefined }[] = await WebAPI.Shifter.all().then(x => x);
-      let sizes: { Id: number | undefined, Name: string | undefined }[] = await WebAPI.Size.all().then(x => x);
-      let types: { Id: number | undefined, Name: string | undefined }[] = await WebAPI.Type.all().then(x => x);
-      let wheelDiameters: { Id: number | undefined, Name: string | undefined }[] = await WebAPI.WheelDiameter.all().then(x => x);
+      let brands: BrandEntity[] = await WebAPI.Brand.all().then(x => x);
+      let shifters: ShifterEntity[] = await WebAPI.Shifter.all().then(x => x);
+      let sizes: SizeEntity[] = await WebAPI.Size.all().then(x => x);
+      let types: TypeEntity[] = await WebAPI.Type.all().then(x => x);
+      let wheelDiameters: WheelDiameterEntity[] = await WebAPI.WheelDiameter.all().then(x => x);
+      let bicycles: BicycleResponse[] = await WebAPI.Bicycle.allData().then(x => x);
 
       this.setState
       ({
@@ -111,7 +114,8 @@ class AddProduct extends Connected<typeof React.Component, IProps & WithStyles<t
         shifters,
         sizes,
         types,
-        wheelDiameters
+        wheelDiameters,
+        bicycles
       });
     }
 
@@ -144,6 +148,18 @@ class AddProduct extends Connected<typeof React.Component, IProps & WithStyles<t
     render()
     {
         const css = this.props.classes;
+
+        const bicycles:JSX.Element[] = this.state.bicycles.map
+        (
+          x => x.Cikkszam != "" ?
+                  <ListItem>
+                    <ListItemText
+                      classes={{ primary: css.item }}
+                      primary={"Cikkszám: " + x.Cikkszam + " Márka: " + x.Marka + " Típus: " + x.Tipus}
+                    />
+                  </ListItem> :
+                  <span/>
+        );
 
         const fields: IFields =
         {
@@ -208,7 +224,14 @@ class AddProduct extends Connected<typeof React.Component, IProps & WithStyles<t
 
         const Body = () =>
         <React.Fragment>
+          <div className={css.container}>
             <Route render={ props => <HeaderComponent {...props}/> }/>
+            <div>
+              <p className={css.formLabel}>Jelenlegi biciklik:</p>
+              <List className={css.list}>
+                  {bicycles}
+              </List>
+            </div>
             <Form
                 ref={this.form}
                 submit={() => this.submit()}
@@ -216,7 +239,7 @@ class AddProduct extends Connected<typeof React.Component, IProps & WithStyles<t
                 render={() => 
                 (
                     <React.Fragment>
-                        <div className="alert alert-info" role="alert">
+                        <div className={css.formLabel}>
                             Új kerékpár adatainak felvitele:
                         </div>
                         <Field {...fields.cikkszam} />
@@ -231,6 +254,7 @@ class AddProduct extends Connected<typeof React.Component, IProps & WithStyles<t
                 )}
             />
             <FooterComponent />
+          </div>
         </React.Fragment>
 
         return Body();

@@ -97,8 +97,7 @@ class Bicycle extends Connected<typeof React.Component, IProps & WithStyles<type
                   <h2 className={css.cim}>{this.props.bicycle.Marka}</h2>
                   <h3 className={css.cim}>{this.props.bicycle.Tipus}</h3>
                   <div className={css.cardText}>
-                      TODO description
-                      IDEA: generate description from data
+                    <p>Ár: {this.props.bicycle.Ar} Ft</p>
                   </div>
               </div>
           </div>

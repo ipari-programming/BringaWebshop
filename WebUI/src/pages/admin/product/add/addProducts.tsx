@@ -37,12 +37,28 @@ const styles = (theme: Theme) =>
     hText:
     {
       color: "#33ff00"
+    },
+    list:
+    {
+      display: "flex",
+      flexDirection: "column",
+      backgroundColor: "#121212",
+      margin: 5
+    },
+    item:
+    {
+      color: "#33ff00 !important"
+    },
+    formLabel:
+    {
+      color: "#33ff00 !important",
+      backgroundColor: CustomColors.background
     }
   })
 
 interface IState
 {
-  brands: { Id: number | undefined, Name: string | undefined }[];
+  brands: [];
   shifters: { Id: number | undefined, Name: string | undefined }[];
   sizes: { Id: number | undefined, Name: string | undefined }[];
   types: { Id: number | undefined, Name: string | undefined }[];

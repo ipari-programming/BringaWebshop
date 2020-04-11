@@ -2,7 +2,7 @@ import * as React from "react";
 import { Connected } from "./../../../../lib/store/connected.mixin";
 import { RouteComponentProps, Route } from "react-router";
 import { AppStore } from "./../../../../lib/appStore";
-import { Theme, createStyles, withStyles, WithStyles } from "@material-ui/core"
+import { Theme, createStyles, withStyles, WithStyles, List, ListItem, ListItemText } from "@material-ui/core"
 import withRoot from "./../../../../withRoot";
 import { CustomColors } from "./../../../../style/colors";
 import HeaderComponent from "./../../../../pages/header/header";
@@ -25,6 +25,22 @@ const styles = (theme: Theme) =>
       justifyContent: "center",
       alignItems: "center",
       minHeight: "100vh",
+      backgroundColor: CustomColors.background
+    },
+    list:
+    {
+      display: "flex",
+      flexDirection: "column",
+      backgroundColor: "#121212",
+      margin: 5
+    },
+    item:
+    {
+      color: "#33ff00 !important"
+    },
+    formLabel:
+    {
+      color: "#33ff00 !important",
       backgroundColor: CustomColors.background
     }
   })
@@ -91,7 +107,14 @@ class AddType extends Connected<typeof React.Component, IProps & WithStyles<type
 
         const types:JSX.Element[] = this.state.types.map
         (
-            x => x.Name != "" ?  <li>{x.Name}</li> : <span/>
+          x => x.Name != "" ?
+                  <ListItem>
+                    <ListItemText
+                      classes={{ primary: css.item }}
+                      primary={x.Name}
+                    />
+                  </ListItem> :
+                  <span/>
         );
 
         const fields: IFields =
@@ -106,13 +129,13 @@ class AddType extends Connected<typeof React.Component, IProps & WithStyles<type
 
         const Body = () =>
         <React.Fragment>
-          <div>
+          <div className={css.container}>
             <Route render={ props => <HeaderComponent {...props}/> }/>
             <div>
-              <p>Jelenlegi márkák:</p>
-              <ul>
+              <p className={css.formLabel}>Jelenlegi márkák:</p>
+              <List className={css.list}>
                   {types}
-              </ul>
+              </List>
             </div>
               <Form
                   ref={this.form}
@@ -121,7 +144,7 @@ class AddType extends Connected<typeof React.Component, IProps & WithStyles<type
                   render={() => 
                   (
                       <React.Fragment>
-                          <div className="alert alert-info" role="alert">
+                          <div className={css.formLabel}>
                               Új típus felvitele:
                           </div>
                           <Field {...fields.tipus} />

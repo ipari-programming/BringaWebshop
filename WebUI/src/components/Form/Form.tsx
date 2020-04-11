@@ -6,10 +6,25 @@ import { IValues } from "./interfaces/IValues";
 import { IFormContext, FormContext } from "./interfaces/IFormContext";
 import { IFormProps } from "./interfaces/IFormProps ";
 import { IValidation } from "./interfaces/IValidation";
+import { Theme, createStyles, WithStyles } from "@material-ui/core";
+import { CustomColors } from "../../style/colors";
 
-export class Form extends React.Component<IFormProps, IFormState>
+const styles = (theme: Theme) =>
+  createStyles
+  ({
+    textColor:
+    {
+      color: "#33ff00 !important"
+    },
+    backgroundColor:
+    {
+      backgroundColor: CustomColors.background
+    }
+  })
+
+export class Form extends React.Component<IFormProps, IFormState, WithStyles<typeof styles>>
 {
-    constructor(props: IFormProps)
+    constructor(props: IFormProps & WithStyles<typeof styles>)
     {
       super(props);
 
@@ -150,6 +165,7 @@ export class Form extends React.Component<IFormProps, IFormState>
 
     public render()
     {
+        const css = styles;
         const { submitSuccess, errors } = this.state;
         const context: IFormContext = { ...this.state, setValues: this.setValues, validate: this.validate };
 

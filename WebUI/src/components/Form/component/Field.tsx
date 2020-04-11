@@ -8,13 +8,27 @@ import { IValues } from "./../interfaces/IValues";
 import InputLabel from "@material-ui/core/InputLabel";
 import TextField from "@material-ui/core/TextField";
 import { Select, GenericSelect } from "./Select/select.generic";
-import { RadioGroup, FormControlLabel, Checkbox, Button } from "@material-ui/core";
+import { RadioGroup, FormControlLabel, Checkbox, Button, Theme, createStyles } from "@material-ui/core";
 import RadioComponent from "./Radio/radio.styled";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import IconButton from "@material-ui/core/IconButton";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { CustomColors } from "../../../style/colors";
+
+const styles = (theme: Theme) =>
+  createStyles
+  ({
+    textColor:
+    {
+      color: "#33ff00 !important"
+    },
+    backgroundColor:
+    {
+      backgroundColor: CustomColors.background
+    }
+  })
 
 let _dates:IValues = {};
 
@@ -77,6 +91,8 @@ export const Field: React.SFC<IFieldProps> = ({
 
           {editor!.toLowerCase() === "textbox" && (
             <TextField
+              /*Ricsi adta hozzá hogy a szöveg fehér legyen*/
+              inputProps={{ style: {color: 'white'}}}
               id={id}
               type="text"
               variant="filled"
@@ -90,6 +106,8 @@ export const Field: React.SFC<IFieldProps> = ({
 
           {editor!.toLowerCase() === "multilinetextbox" && (
             <TextField
+              /*Ricsi adta hozzá hogy a szöveg fehér legyen*/
+              inputProps={{ style: {color: 'white'} }}
               id={id}
               type="text"
               variant="filled"

@@ -132,7 +132,7 @@ class AddType extends Connected<typeof React.Component, IProps & WithStyles<type
           <div className={css.container}>
             <Route render={ props => <HeaderComponent {...props}/> }/>
             <div>
-              <p className={css.formLabel}>Jelenlegi márkák:</p>
+              <p className={css.formLabel}>Jelenlegi típusok:</p>
               <List className={css.list}>
                   {types}
               </List>
